@@ -29,7 +29,7 @@ public class Serpiente {
     /**
      * Metodo encargado de aumentar el tamanio de la serpiente 
      */
-    public void aumentarTamnio() {
+    public void aumentarTamanio() {
         
     }
     
