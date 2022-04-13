@@ -76,12 +76,16 @@ public class Serpiente {
     public void continuarMoviendo(double pasos) {
         
         if(this.posicionX < this.posicionAnteriorX) {
+            this.posicionAnteriorX = this.posicionX;
             this.posicionX -= pasos;
         }else if (this.posicionX > this.posicionAnteriorX) {
+            this.posicionAnteriorX = this.posicionX;
             this.posicionX += pasos;
         }else if(this.posicionY < this.posicionAnteriorY) {
+            this.posicionAnteriorY = this.posicionY;
             this.posicionY -= pasos;
         }else if(this.posicionY > this.posicionAnteriorY) {
+            this.posicionAnteriorY = this.posicionY;
             this.posicionY += pasos;
         }
     }
