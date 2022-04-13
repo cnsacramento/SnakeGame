@@ -23,7 +23,11 @@ public class Serpiente {
      */
     public Serpiente(){}
     
-    
+    /**
+     * Constructor con 2 parametros
+     * @param posicionX Posicion X inicial
+     * @param posicionY Posicion Y inicial
+     */
     public Serpiente(double posicionX, double posicionY) {
         
         this.posicionX = posicionX;
