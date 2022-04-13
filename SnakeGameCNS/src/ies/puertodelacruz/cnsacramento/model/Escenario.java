@@ -11,10 +11,25 @@ package ies.puertodelacruz.cnsacramento.model;
 public class Escenario {
     
     private Serpiente serpiente;
-    private int tamanioX;
-    private int tamanioY;
+    private double tamanioX;
+    private double tamanioY;
     
     
+    /* CONSTRUCTORES */
+    
+    /**
+     * Constructor por defecto sin parametros
+     */
+    public Escenario(){}
+    
+    public Escenario(double tamanioX, double tamanioY) {
+        
+        this.tamanioX = tamanioX;
+        this.tamanioY = tamanioY;
+        double posicionCentralX = tamanioX / 2;
+        double posicionCentralY = tamanioY / 2;
+        serpiente = new Serpiente(posicionCentralX,posicionCentralY);
+    }
     /* METODOS */
     
     /*
