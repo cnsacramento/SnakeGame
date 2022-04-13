@@ -47,10 +47,13 @@ public class Serpiente {
                 break;
             case "DOWN":
                 this.posicionY += pasos;
+                break;
             case "LEFT":
                 this.posicionX -= pasos;
+                break;
             case "RIGHT":
                 this.posicionX += pasos;
+                break;
             default:
                 break;
         }
