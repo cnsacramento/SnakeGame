@@ -39,8 +39,21 @@ public class Serpiente {
     /**
      * Metodo encargado del movimiento de la serpiente
      */
-    public void mover() {
+    public void mover(String accion, double pasos) {
         
+        switch(accion) {
+            case "UP": 
+                this.posicionY -= pasos;
+                break;
+            case "DOWN":
+                this.posicionY += pasos;
+            case "LEFT":
+                this.posicionX -= pasos;
+            case "RIGTH":
+                this.posicionX += pasos;
+            default:
+                break;
+        }
     }
     
     /**
