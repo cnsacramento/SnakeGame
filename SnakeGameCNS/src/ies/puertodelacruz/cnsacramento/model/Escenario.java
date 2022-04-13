@@ -56,7 +56,7 @@ public class Escenario {
         this.serpiente = serpiente;
     }
     
-    public int getTamanioX() {
+    public double getTamanioX() {
         return this.tamanioX;
     } 
     
@@ -64,7 +64,7 @@ public class Escenario {
         this.tamanioX = tamanioX;
     }
     
-    public int getTamanioY() {
+    public double getTamanioY() {
         return this.tamanioY;
     }
     
