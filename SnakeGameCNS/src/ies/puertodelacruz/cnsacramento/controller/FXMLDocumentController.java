@@ -5,13 +5,14 @@
 package ies.puertodelacruz.cnsacramento.controller;
 
 import ies.puertodelacruz.cnsacramento.model.Partida;
-import java.awt.GraphicsConfiguration;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 /**
  *
@@ -23,6 +24,7 @@ public class FXMLDocumentController implements Initializable {
     private Canvas escenarioCanvas;
     private GraphicsContext graficos;
     private Partida partida;
+    private double dimensionSerpiente = 10;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -41,7 +43,33 @@ public class FXMLDocumentController implements Initializable {
         
         double posicionXserpiente = partida.getEscenario().getSerpiente().getPosicionX();
         double posicionYserpiente = partida.getEscenario().getSerpiente().getPosicionY();
-        graficos.fillRect(posicionXserpiente, posicionYserpiente, 10, 10);
+        graficos.fillRect(posicionXserpiente, posicionYserpiente, dimensionSerpiente, dimensionSerpiente);
+    }
+
+    @FXML
+    private void moverSerpiente(KeyEvent event) {
+        
+        KeyCode tecla = event.getCode();
+        System.out.println(tecla);
+        double posicionXserpiente = partida.getEscenario().getSerpiente().getPosicionX();
+        double posicionYserpiente = partida.getEscenario().getSerpiente().getPosicionY();
+        System.out.println("Posicion serpiente -> (" + posicionXserpiente + ", " + posicionYserpiente + ")");
+        switch(tecla) {
+            case UP:
+                System.out.println("Subiendo...");
+                break;
+            case DOWN:
+                System.out.println("Bajando...");
+                break;
+            case LEFT:
+                System.out.println("Izquierda...");
+                break;
+            case RIGHT:
+                System.out.println("Derecha...");
+                break;
+            default:
+                break;
+        }
     }
     
 }
