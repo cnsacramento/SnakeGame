@@ -17,6 +17,8 @@ public class Serpiente {
     private double posicionAnteriorX;
     private double posicionAnteriorY;
     private boolean enMovimiento = false;
+    private boolean bloqueoUD = false;
+    private boolean bloqueoLR = false;
     private LinkedList<Integer> cuerpo;
     
     /* CONSTRUCTORES */
@@ -39,6 +41,7 @@ public class Serpiente {
     
     /* METODOS */
     
+    
     /**
      * Metodo encargado del movimiento de la serpiente
      * @param accion Direccion de la serpiente
@@ -47,26 +50,56 @@ public class Serpiente {
     public void mover(String accion, double pasos) {
         
         this.enMovimiento = true;
+        
         switch(accion) {
             case "UP": 
-                this.posicionAnteriorY = this.posicionY;
-                this.posicionY -= pasos;
-                this.posicionAnteriorX = this.posicionX;
+                if(!bloqueoUD) {
+                    this.posicionAnteriorY = this.posicionY;
+                    this.posicionY -= pasos;
+                    this.posicionAnteriorX = this.posicionX;
+                }
+                bloquearTeclas("UD");
                 break;
             case "DOWN":
-                this.posicionAnteriorY = this.posicionY;
-                this.posicionY += pasos;
-                this.posicionAnteriorX = this.posicionX;
+                if(!bloqueoUD) {
+                    this.posicionAnteriorY = this.posicionY;
+                    this.posicionY += pasos;
+                    this.posicionAnteriorX = this.posicionX;
+                }
+                bloquearTeclas("UD");
                 break;
             case "LEFT":
-                this.posicionAnteriorX = this.posicionX;
-                this.posicionX -= pasos;
-                this.posicionAnteriorY = this.posicionY;
+                if(!bloqueoLR) {
+                    this.posicionAnteriorX = this.posicionX;
+                    this.posicionX -= pasos;
+                    this.posicionAnteriorY = this.posicionY;
+                }
+                bloquearTeclas("LR");
                 break;
             case "RIGHT":
-                this.posicionAnteriorX = this.posicionX;
-                this.posicionX += pasos;
-                this.posicionAnteriorY = this.posicionY;
+                if(!bloqueoLR) {
+                    this.posicionAnteriorX = this.posicionX;
+                    this.posicionX += pasos;
+                    this.posicionAnteriorY = this.posicionY;
+                }
+                bloquearTeclas("LR");
+                break;
+            default:
+                break;
+        }
+    }
+    
+    
+    public void bloquearTeclas(String teclas) {
+        
+        switch(teclas) {
+            case "UD":
+                this.bloqueoUD = true;
+                this.bloqueoLR = false;
+                break;
+            case "LR":
+                this.bloqueoUD = false;
+                this.bloqueoLR = true;
                 break;
             default:
                 break;
