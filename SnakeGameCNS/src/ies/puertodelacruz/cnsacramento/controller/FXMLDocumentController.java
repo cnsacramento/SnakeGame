@@ -5,6 +5,7 @@
 package ies.puertodelacruz.cnsacramento.controller;
 
 import ies.puertodelacruz.cnsacramento.model.Partida;
+import ies.puertodelacruz.cnsacramento.model.Serpiente;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -25,6 +26,7 @@ public class FXMLDocumentController implements Initializable {
     private GraphicsContext graficos;
     private Partida partida;
     private double dimensionSerpiente = 10;
+    private Serpiente serpiente;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -32,6 +34,7 @@ public class FXMLDocumentController implements Initializable {
         double ancho = escenarioCanvas.getWidth();
         double alto = escenarioCanvas.getHeight();
         partida.empezarPartida(ancho, alto);
+        serpiente = partida.getEscenario().getSerpiente();
         System.out.println("Escenario tamaño X -> " + partida.getEscenario().getTamanioX());
         System.out.println("Escenario tamaño Y -> " + partida.getEscenario().getTamanioY());
         graficos = escenarioCanvas.getGraphicsContext2D();
@@ -57,15 +60,19 @@ public class FXMLDocumentController implements Initializable {
         switch(tecla) {
             case UP:
                 System.out.println("Subiendo...");
+                serpiente.mover("UP", dimensionSerpiente);
                 break;
             case DOWN:
                 System.out.println("Bajando...");
+                serpiente.mover("DOWN", dimensionSerpiente);
                 break;
             case LEFT:
                 System.out.println("Izquierda...");
+                serpiente.mover("LEFT", dimensionSerpiente);
                 break;
             case RIGHT:
                 System.out.println("Derecha...");
+                serpiente.mover("RIGHT", dimensionSerpiente);
                 break;
             default:
                 break;
