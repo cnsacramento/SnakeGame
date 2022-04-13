@@ -22,13 +22,16 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Canvas escenarioCanvas;
     private GraphicsContext graficos;
+    private Partida partida;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Partida partida = new Partida();
+        partida = new Partida();
         double ancho = escenarioCanvas.getWidth();
         double alto = escenarioCanvas.getHeight();
         partida.empezarPartida(ancho, alto);
+        System.out.println("Escenario tamaño X -> " + partida.getEscenario().getTamanioX());
+        System.out.println("Escenario tamaño Y -> " + partida.getEscenario().getTamanioY());
         graficos = escenarioCanvas.getGraphicsContext2D();
         mostrarGraficos();
     }
@@ -36,7 +39,9 @@ public class FXMLDocumentController implements Initializable {
     
     public void mostrarGraficos() {
         
-        graficos.fillRect(0, 0, 10, 10);
+        double posicionXserpiente = partida.getEscenario().getSerpiente().getPosicionX();
+        double posicionYserpiente = partida.getEscenario().getSerpiente().getPosicionY();
+        graficos.fillRect(posicionXserpiente, posicionYserpiente, 10, 10);
     }
     
 }
