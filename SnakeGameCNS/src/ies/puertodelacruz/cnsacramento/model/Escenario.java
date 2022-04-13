@@ -4,6 +4,8 @@
  */
 package ies.puertodelacruz.cnsacramento.model;
 
+import java.util.Random;
+
 /**
  * Clase encargada del escenario
  * @author christian
@@ -13,6 +15,8 @@ public class Escenario {
     private Serpiente serpiente;
     private double tamanioX;
     private double tamanioY;
+    private double manzanaX;
+    private double manzanaY;
     private boolean colisionDetectada = false;
     
     
@@ -48,6 +52,20 @@ public class Escenario {
         }else if(serpiente.getPosicionY() >= this.tamanioY || serpiente.getPosicionY() < 0) {
             this.colisionDetectada = true;
         }
+        
+        if(serpiente.getPosicionX() == manzanaX && serpiente.getPosicionY() == manzanaY) {
+            generarManzana();
+        }
+    }
+    
+    
+    /**
+     * Metodo encargado de generar la posicion de la manzana
+     */
+    public void generarManzana() {
+        Random rnd = new Random();
+        manzanaX = rnd.nextInt() + tamanioX;
+        manzanaY = rnd.nextInt() + tamanioY;
     }
     
     /**
