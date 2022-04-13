@@ -32,8 +32,8 @@ public class Escenario {
         
         this.tamanioX = tamanioX;
         this.tamanioY = tamanioY;
-        double posicionCentralX = tamanioX / 2;
-        double posicionCentralY = tamanioY / 2;
+        double posicionCentralX = this.tamanioX / 2;
+        double posicionCentralY = this.tamanioY / 2;
         serpiente = new Serpiente(posicionCentralX,posicionCentralY);
     }
     /* METODOS */
@@ -43,9 +43,9 @@ public class Escenario {
     */
     public void detectarColision() {
         
-        if(serpiente.getPosicionX() >= this.tamanioX){
+        if(serpiente.getPosicionX() >= this.tamanioX || serpiente.getPosicionX() < 0){
             this.colisionDetectada = true;
-        }else if(serpiente.getPosicionY() >= this.tamanioY) {
+        }else if(serpiente.getPosicionY() >= this.tamanioY || serpiente.getPosicionY() < 0) {
             this.colisionDetectada = true;
         }
     }

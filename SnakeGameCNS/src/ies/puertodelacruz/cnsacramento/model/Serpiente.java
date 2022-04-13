@@ -40,6 +40,8 @@ public class Serpiente {
     
     /**
      * Metodo encargado del movimiento de la serpiente
+     * @param accion Direccion de la serpiente
+     * @param pasos Pixeles de movimiento
      */
     public void mover(String accion, double pasos) {
         
