@@ -70,7 +70,7 @@ public class FXMLDocumentController implements Initializable {
                 }
                 System.out.println(escenario.getColisionDetectada());
 
-                serpiente.continuarMoviendo(dimensionSerpiente);
+                serpiente.continuarMoviendo();
                 escenario.detectarColision();
                 graficos.fillRect(serpiente.getPosicionX(), serpiente.getPosicionY(), dimensionSerpiente, dimensionSerpiente);
                 graficos.fillOval(escenario.getManzanaX(), escenario.getManzanaY(), dimensionSerpiente, dimensionSerpiente);
@@ -89,22 +89,22 @@ public class FXMLDocumentController implements Initializable {
         switch(tecla) {
             case UP:
                 System.out.println("Subiendo...");
-                serpiente.mover("UP", dimensionSerpiente);
+                serpiente.mover("UP");
                 System.out.println("Posicion serpiente -> (" + serpiente.getPosicionX() + ", " + serpiente.getPosicionY() + ")");
                 break;
             case DOWN:
                 System.out.println("Bajando...");
-                serpiente.mover("DOWN", dimensionSerpiente);
+                serpiente.mover("DOWN");
                 System.out.println("Posicion serpiente -> (" + serpiente.getPosicionX() + ", " + serpiente.getPosicionY() + ")");
                 break;
             case LEFT:
                 System.out.println("Izquierda...");
-                serpiente.mover("LEFT", dimensionSerpiente);
+                serpiente.mover("LEFT");
                 System.out.println("Posicion serpiente -> (" + serpiente.getPosicionX() + ", " + serpiente.getPosicionY() + ")");
                 break;
             case RIGHT:
                 System.out.println("Derecha...");
-                serpiente.mover("RIGHT", dimensionSerpiente);
+                serpiente.mover("RIGHT");
                 System.out.println("Posicion serpiente -> (" + serpiente.getPosicionX() + ", " + serpiente.getPosicionY() + ")");
                 break;
             default:
