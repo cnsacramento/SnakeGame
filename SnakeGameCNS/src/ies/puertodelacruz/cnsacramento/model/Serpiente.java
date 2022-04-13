@@ -17,6 +17,7 @@ public class Serpiente {
     private double posicionAnteriorX;
     private double posicionAnteriorY;
     private boolean enMovimiento = false;
+    private boolean bloquearContinuar = false;
     private boolean bloqueoUD = false;
     private boolean bloqueoLR = false;
     private LinkedList<Integer> cuerpo;
@@ -57,42 +58,49 @@ public class Serpiente {
                     this.posicionAnteriorY = this.posicionY;
                     this.posicionY -= pasos;
                     this.posicionAnteriorX = this.posicionX;
+                    this.bloquearContinuar = true;
                 }
-                bloquearTeclas("UD");
+                bloquearMovimiento("UD");
                 break;
             case "DOWN":
                 if(!bloqueoUD) {
                     this.posicionAnteriorY = this.posicionY;
                     this.posicionY += pasos;
                     this.posicionAnteriorX = this.posicionX;
+                    this.bloquearContinuar = true;
                 }
-                bloquearTeclas("UD");
+                bloquearMovimiento("UD");
                 break;
             case "LEFT":
                 if(!bloqueoLR) {
                     this.posicionAnteriorX = this.posicionX;
                     this.posicionX -= pasos;
                     this.posicionAnteriorY = this.posicionY;
+                    this.bloquearContinuar = true;
                 }
-                bloquearTeclas("LR");
+                bloquearMovimiento("LR");
                 break;
             case "RIGHT":
                 if(!bloqueoLR) {
                     this.posicionAnteriorX = this.posicionX;
                     this.posicionX += pasos;
                     this.posicionAnteriorY = this.posicionY;
+                    this.bloquearContinuar = true;
                 }
-                bloquearTeclas("LR");
+                bloquearMovimiento("LR");
                 break;
             default:
                 break;
         }
     }
     
-    
-    public void bloquearTeclas(String teclas) {
+    /**
+     * Metodo que bloquea el movimiento segun la direccion de la serpiente
+     * @param movimiento Movimiento que hace la serpiente 
+     */
+    public void bloquearMovimiento(String movimiento) {
         
-        switch(teclas) {
+        switch(movimiento) {
             case "UD":
                 this.bloqueoUD = true;
                 this.bloqueoLR = false;
@@ -101,10 +109,13 @@ public class Serpiente {
                 this.bloqueoUD = false;
                 this.bloqueoLR = true;
                 break;
+            case "CONT":
+                this.bloquearContinuar = false;
             default:
                 break;
         }
     }
+    
     
     /**
      * Metodo encargado de mantener en movimiento la serpiente
@@ -112,19 +123,24 @@ public class Serpiente {
      */
     public void continuarMoviendo(double pasos) {
         
-        if(this.posicionX < this.posicionAnteriorX) {
-            this.posicionAnteriorX = this.posicionX;
-            this.posicionX -= pasos;
-        }else if (this.posicionX > this.posicionAnteriorX) {
-            this.posicionAnteriorX = this.posicionX;
-            this.posicionX += pasos;
-        }else if(this.posicionY < this.posicionAnteriorY) {
-            this.posicionAnteriorY = this.posicionY;
-            this.posicionY -= pasos;
-        }else if(this.posicionY > this.posicionAnteriorY) {
-            this.posicionAnteriorY = this.posicionY;
-            this.posicionY += pasos;
+        if(!bloquearContinuar) {
+            if (this.posicionX < this.posicionAnteriorX) {
+                this.posicionAnteriorX = this.posicionX;
+                this.posicionX -= pasos;
+            } else if (this.posicionX > this.posicionAnteriorX) {
+                this.posicionAnteriorX = this.posicionX;
+                this.posicionX += pasos;
+            } else if (this.posicionY < this.posicionAnteriorY) {
+                this.posicionAnteriorY = this.posicionY;
+                this.posicionY -= pasos;
+            } else if (this.posicionY > this.posicionAnteriorY) {
+                this.posicionAnteriorY = this.posicionY;
+                this.posicionY += pasos;
+            }
         }
+        
+        bloquearMovimiento("CONT");
+        
     }
     
     /**
@@ -176,12 +192,36 @@ public class Serpiente {
     public void setEnMovimiento(boolean enMovimiento) {
         this.enMovimiento = enMovimiento;
     }
-    
-    public LinkedList<Integer> getTamanio() {
-        return this.cuerpo;
+
+    public boolean isBloqueoUD() {
+        return bloqueoUD;
     }
-    
-    public void setTamanio(LinkedList<Integer> tamanio) {
-        this.cuerpo = tamanio;
+
+    public void setBloqueoUD(boolean bloqueoUD) {
+        this.bloqueoUD = bloqueoUD;
+    }
+
+    public boolean isBloqueoLR() {
+        return bloqueoLR;
+    }
+
+    public void setBloqueoLR(boolean bloqueoLR) {
+        this.bloqueoLR = bloqueoLR;
+    }
+
+    public boolean isBloquearContinuar() {
+        return bloquearContinuar;
+    }
+
+    public void setBloquearContinuar(boolean bloquearContinuar) {
+        this.bloquearContinuar = bloquearContinuar;
+    }
+
+    public LinkedList<Integer> getCuerpo() {
+        return cuerpo;
+    }
+
+    public void setCuerpo(LinkedList<Integer> cuerpo) {
+        this.cuerpo = cuerpo;
     }
 }
