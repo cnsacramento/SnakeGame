@@ -57,6 +57,7 @@ public class FXMLDocumentController implements Initializable {
         fps.getKeyFrames().add(new KeyFrame(Duration.millis(VELOCIDAD_JUEGO), (t) -> {
             
             graficos.clearRect(0, 0, escenarioCanvas.getWidth(), escenarioCanvas.getHeight());
+            serpiente.continuarMoviendo(dimensionSerpiente);
             graficos.fillRect(serpiente.getPosicionX(), serpiente.getPosicionY(), dimensionSerpiente, dimensionSerpiente);
         }));
         
