@@ -57,11 +57,21 @@ public class FXMLDocumentController implements Initializable {
         fps.getKeyFrames().add(new KeyFrame(Duration.millis(VELOCIDAD_JUEGO), (t) -> {
             
             graficos.clearRect(0, 0, escenarioCanvas.getWidth(), escenarioCanvas.getHeight());
+            if(escenario.getColisionDetectada()) {
+                graficos.fillRect(serpiente.getPosicionAnteriorX(), serpiente.getPosicionAnteriorY(), dimensionSerpiente, dimensionSerpiente);
+                fps.stop();
+                System.out.println("GAME OVER");
+                
+            }
+            System.out.println(escenario.getColisionDetectada());
             serpiente.continuarMoviendo(dimensionSerpiente);
+            escenario.detectarColision();
             graficos.fillRect(serpiente.getPosicionX(), serpiente.getPosicionY(), dimensionSerpiente, dimensionSerpiente);
+            //System.out.println(escenario.detectarColision());
         }));
         
         fps.play();
+        
     }
 
     @FXML
