@@ -22,6 +22,11 @@ public class Escenario {
      */
     public Escenario(){}
     
+    /**
+     * Constructor con dos parametros
+     * @param tamanioX Ancho del escenario
+     * @param tamanioY Alto del escenario
+     */
     public Escenario(double tamanioX, double tamanioY) {
         
         this.tamanioX = tamanioX;
