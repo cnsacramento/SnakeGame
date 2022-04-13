@@ -4,6 +4,7 @@
  */
 package ies.puertodelacruz.cnsacramento.controller;
 
+import ies.puertodelacruz.cnsacramento.model.Escenario;
 import ies.puertodelacruz.cnsacramento.model.Partida;
 import ies.puertodelacruz.cnsacramento.model.Serpiente;
 import java.net.URL;
@@ -31,6 +32,7 @@ public class FXMLDocumentController implements Initializable {
     private Partida partida;
     private final double dimensionSerpiente = 10;
     private Serpiente serpiente;
+    private Escenario escenario;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -38,13 +40,11 @@ public class FXMLDocumentController implements Initializable {
         double ancho = escenarioCanvas.getWidth();
         double alto = escenarioCanvas.getHeight();
         partida.empezarPartida(ancho, alto);
-        serpiente = partida.getEscenario().getSerpiente();
-        System.out.println("Escenario tamaño X -> " + partida.getEscenario().getTamanioX());
-        System.out.println("Escenario tamaño Y -> " + partida.getEscenario().getTamanioY());
+        escenario = partida.getEscenario();
+        serpiente = escenario.getSerpiente();
+        System.out.println("Escenario tamaño -> (" + escenario.getTamanioX() + "," + escenario.getTamanioY() + ")");
         graficos = escenarioCanvas.getGraphicsContext2D();
-        double posicionXserpiente = partida.getEscenario().getSerpiente().getPosicionX();
-        double posicionYserpiente = partida.getEscenario().getSerpiente().getPosicionY();
-        graficos.fillRect(posicionXserpiente, posicionYserpiente, dimensionSerpiente, dimensionSerpiente);
+        graficos.fillRect(serpiente.getPosicionX(), serpiente.getPosicionY(), dimensionSerpiente, dimensionSerpiente);
         mostrarGraficos();
     }
 
@@ -67,26 +67,27 @@ public class FXMLDocumentController implements Initializable {
     private void moverSerpiente(KeyEvent event) {
         
         KeyCode tecla = event.getCode();
-        System.out.println(tecla);
-        double posicionXserpiente = partida.getEscenario().getSerpiente().getPosicionX();
-        double posicionYserpiente = partida.getEscenario().getSerpiente().getPosicionY();
-        System.out.println("Posicion serpiente -> (" + posicionXserpiente + ", " + posicionYserpiente + ")");
+        
         switch(tecla) {
             case UP:
                 System.out.println("Subiendo...");
                 serpiente.mover("UP", dimensionSerpiente);
+                System.out.println("Posicion serpiente -> (" + serpiente.getPosicionX() + ", " + serpiente.getPosicionY() + ")");
                 break;
             case DOWN:
                 System.out.println("Bajando...");
                 serpiente.mover("DOWN", dimensionSerpiente);
+                System.out.println("Posicion serpiente -> (" + serpiente.getPosicionX() + ", " + serpiente.getPosicionY() + ")");
                 break;
             case LEFT:
                 System.out.println("Izquierda...");
                 serpiente.mover("LEFT", dimensionSerpiente);
+                System.out.println("Posicion serpiente -> (" + serpiente.getPosicionX() + ", " + serpiente.getPosicionY() + ")");
                 break;
             case RIGHT:
                 System.out.println("Derecha...");
                 serpiente.mover("RIGHT", dimensionSerpiente);
+                System.out.println("Posicion serpiente -> (" + serpiente.getPosicionX() + ", " + serpiente.getPosicionY() + ")");
                 break;
             default:
                 break;
