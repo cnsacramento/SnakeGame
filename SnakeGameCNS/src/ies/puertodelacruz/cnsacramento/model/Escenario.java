@@ -40,6 +40,21 @@ public class Escenario {
         double posicionCentralY = this.tamanioY / 2;
         serpiente = new Serpiente(posicionCentralX,posicionCentralY);
     }
+    
+    /**
+     * Constructor que recibe 3 parametros
+     * @param tamanioX Ancho del escenario
+     * @param tamanioY Alto del escenario
+     * @param pasosSerpiente Cantidad de pasos que se mueve la serpiente
+     */
+    public Escenario(double tamanioX, double tamanioY, double pasosSerpiente) {
+        this.tamanioX = tamanioX;
+        this.tamanioY = tamanioY;
+        double posicionCentralX = this.tamanioX / 2;
+        double posicionCentralY = this.tamanioY / 2;
+        serpiente = new Serpiente(posicionCentralX, posicionCentralY, pasosSerpiente);
+    }
+    
     /* METODOS */
     
     /*
@@ -64,8 +79,8 @@ public class Escenario {
      */
     public void generarManzana() {
         Random rnd = new Random();
-        manzanaX = rnd.nextInt() + tamanioX;
-        manzanaY = rnd.nextInt() + tamanioY;
+        manzanaX = rnd.nextInt((int)tamanioX / 10) * 10;
+        manzanaY = rnd.nextInt((int)tamanioY / 10) * 10;
     }
     
     /**

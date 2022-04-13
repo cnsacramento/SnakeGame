@@ -16,6 +16,7 @@ public class Serpiente {
     private double posicionY;
     private double posicionAnteriorX;
     private double posicionAnteriorY;
+    private double pasos;
     private boolean enMovimiento = false;
     private boolean bloquearContinuar = false;
     private boolean bloqueoUD = false;
@@ -40,8 +41,18 @@ public class Serpiente {
         this.posicionY = posicionY;
     }
     
-    /* METODOS */
+    /**
+     * Constructor que recibe 3 parametros
+     * @param posicionX Posicion X inicial
+     * @param posicionY Posicion Y inicial
+     * @param pasos Numero de pasos que avanza la serpiente
+     */
+    public Serpiente(double posicionX, double posicionY, double pasos) {
+        this(posicionX,posicionY);
+        this.pasos = pasos;
+    }
     
+    /* METODOS */
     
     /**
      * Metodo encargado del movimiento de la serpiente
@@ -51,6 +62,7 @@ public class Serpiente {
     public void mover(String accion, double pasos) {
         
         this.enMovimiento = true;
+        this.pasos = pasos;
         
         switch(accion) {
             case "UP": 
@@ -215,6 +227,14 @@ public class Serpiente {
 
     public void setBloquearContinuar(boolean bloquearContinuar) {
         this.bloquearContinuar = bloquearContinuar;
+    }
+
+    public double getPasos() {
+        return pasos;
+    }
+
+    public void setPasos(double pasos) {
+        this.pasos = pasos;
     }
 
     public LinkedList<Integer> getCuerpo() {
