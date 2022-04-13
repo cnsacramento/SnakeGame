@@ -39,17 +39,18 @@ public class FXMLDocumentController implements Initializable {
         partida = new Partida();
         double ancho = escenarioCanvas.getWidth();
         double alto = escenarioCanvas.getHeight();
-        partida.empezarPartida(ancho, alto);
-        escenario = partida.getEscenario();
+        //partida.empezarPartida(ancho, alto);
+        escenario = new Escenario(ancho,alto,dimensionSerpiente);
+        partida.setEscenario(escenario);
+        //escenario = partida.getEscenario();
         escenario.generarManzana();
         serpiente = escenario.getSerpiente();
         System.out.println("Escenario tamaño -> (" + escenario.getTamanioX() + "," + escenario.getTamanioY() + ")");
         graficos = escenarioCanvas.getGraphicsContext2D();
         graficos.fillRect(serpiente.getPosicionX(), serpiente.getPosicionY(), dimensionSerpiente, dimensionSerpiente);
-        mostrarGraficos();
         graficos.fillOval(escenario.getManzanaX(), escenario.getManzanaY(), dimensionSerpiente, dimensionSerpiente);
-        System.out.println(escenario.getManzanaX());
-        System.out.println(escenario.getManzanaY());
+        mostrarGraficos();
+        System.out.println("MANZANA -> (" + escenario.getManzanaX() + ", " + escenario.getManzanaY() + ")");
     }
 
     
