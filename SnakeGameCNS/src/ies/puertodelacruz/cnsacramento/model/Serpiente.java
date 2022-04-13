@@ -57,18 +57,16 @@ public class Serpiente {
     /**
      * Metodo encargado del movimiento de la serpiente
      * @param accion Direccion de la serpiente
-     * @param pasos Pixeles de movimiento
      */
-    public void mover(String accion, double pasos) {
+    public void mover(String accion) {
         
         this.enMovimiento = true;
-        this.pasos = pasos;
         
         switch(accion) {
             case "UP": 
                 if(!bloqueoUD) {
                     this.posicionAnteriorY = this.posicionY;
-                    this.posicionY -= pasos;
+                    this.posicionY -= this.pasos;
                     this.posicionAnteriorX = this.posicionX;
                     this.bloquearContinuar = true;
                 }
@@ -77,7 +75,7 @@ public class Serpiente {
             case "DOWN":
                 if(!bloqueoUD) {
                     this.posicionAnteriorY = this.posicionY;
-                    this.posicionY += pasos;
+                    this.posicionY += this.pasos;
                     this.posicionAnteriorX = this.posicionX;
                     this.bloquearContinuar = true;
                 }
@@ -86,7 +84,7 @@ public class Serpiente {
             case "LEFT":
                 if(!bloqueoLR) {
                     this.posicionAnteriorX = this.posicionX;
-                    this.posicionX -= pasos;
+                    this.posicionX -= this.pasos;
                     this.posicionAnteriorY = this.posicionY;
                     this.bloquearContinuar = true;
                 }
@@ -95,7 +93,7 @@ public class Serpiente {
             case "RIGHT":
                 if(!bloqueoLR) {
                     this.posicionAnteriorX = this.posicionX;
-                    this.posicionX += pasos;
+                    this.posicionX += this.pasos;
                     this.posicionAnteriorY = this.posicionY;
                     this.bloquearContinuar = true;
                 }
@@ -131,23 +129,22 @@ public class Serpiente {
     
     /**
      * Metodo encargado de mantener en movimiento la serpiente
-     * @param pasos Cantidad de pasos que se mueve la serpiente
      */
-    public void continuarMoviendo(double pasos) {
+    public void continuarMoviendo() {
         
         if(!bloquearContinuar) {
             if (this.posicionX < this.posicionAnteriorX) {
                 this.posicionAnteriorX = this.posicionX;
-                this.posicionX -= pasos;
+                this.posicionX -= this.pasos;
             } else if (this.posicionX > this.posicionAnteriorX) {
                 this.posicionAnteriorX = this.posicionX;
-                this.posicionX += pasos;
+                this.posicionX += this.pasos;
             } else if (this.posicionY < this.posicionAnteriorY) {
                 this.posicionAnteriorY = this.posicionY;
-                this.posicionY -= pasos;
+                this.posicionY -= this.pasos;
             } else if (this.posicionY > this.posicionAnteriorY) {
                 this.posicionAnteriorY = this.posicionY;
-                this.posicionY += pasos;
+                this.posicionY += this.pasos;
             }
         }
         

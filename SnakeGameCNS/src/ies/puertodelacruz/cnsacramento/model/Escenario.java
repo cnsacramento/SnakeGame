@@ -79,8 +79,8 @@ public class Escenario {
      */
     public void generarManzana() {
         Random rnd = new Random();
-        manzanaX = rnd.nextInt((int)tamanioX / 10) * 10;
-        manzanaY = rnd.nextInt((int)tamanioY / 10) * 10;
+        manzanaX = rnd.nextInt( (int) (tamanioX / serpiente.getPasos()) ) * serpiente.getPasos();
+        manzanaY = rnd.nextInt((int) (tamanioY / serpiente.getPasos()) ) * serpiente.getPasos();
     }
     
     /**
