@@ -16,6 +16,7 @@ public class Serpiente {
     private double posicionY;
     private double posicionAnteriorX;
     private double posicionAnteriorY;
+    private boolean enMovimiento = false;
     private LinkedList<Integer> cuerpo;
     
     /* CONSTRUCTORES */
@@ -45,6 +46,7 @@ public class Serpiente {
      */
     public void mover(String accion, double pasos) {
         
+        this.enMovimiento = true;
         switch(accion) {
             case "UP": 
                 this.posicionAnteriorY = this.posicionY;
@@ -132,6 +134,14 @@ public class Serpiente {
     
     public void setPosicionAnteriorY(double posicionAnteriorY) {
         this.posicionAnteriorY = posicionAnteriorY;
+    }
+    
+    public boolean getEnMovimiento(){
+        return this.enMovimiento;
+    }
+    
+    public void setEnMovimiento(boolean enMovimiento) {
+        this.enMovimiento = enMovimiento;
     }
     
     public LinkedList<Integer> getTamanio() {
