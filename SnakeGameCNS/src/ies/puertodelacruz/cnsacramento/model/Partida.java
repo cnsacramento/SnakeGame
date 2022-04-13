@@ -53,4 +53,22 @@ public class Partida {
     public void perderPartida() {
         
     }
+    
+    /* GETTERS Y SETTERS */
+    
+    public String getEstado() {
+        return this.estado;
+    }
+    
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    
+    public Escenario getEscenario() {
+        return this.escenario;
+    }
+    
+    public void setEscenario(Escenario escenario) {
+        this.escenario = escenario;
+    }
 }
