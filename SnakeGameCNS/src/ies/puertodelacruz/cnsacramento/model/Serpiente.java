@@ -12,10 +12,23 @@ import java.util.LinkedList;
  */
 public class Serpiente {
     
-    private int posicionX;
-    private int posicionY;
-    private LinkedList<Integer> tamanio;
+    private double posicionX;
+    private double posicionY;
+    private LinkedList<Integer> cuerpo;
     
+    /* CONSTRUCTORES */
+    
+    /**
+     * Constructor por defecto sin parametros
+     */
+    public Serpiente(){}
+    
+    
+    public Serpiente(double posicionX, double posicionY) {
+        
+        this.posicionX = posicionX;
+        this.posicionY = posicionY;
+    }
     
     /* METODOS */
     
@@ -36,7 +49,7 @@ public class Serpiente {
     
     /* GETTERS Y SETTERS */
     
-    public int getPosicionX() {
+    public double getPosicionX() {
         return this.posicionX;
     }
     
@@ -44,7 +57,7 @@ public class Serpiente {
         this.posicionX = posicionX;
     }
     
-    public int getPosicionY() {
+    public double getPosicionY() {
         return this.posicionY;
     }
     
@@ -53,10 +66,10 @@ public class Serpiente {
     }
     
     public LinkedList<Integer> getTamanio() {
-        return this.tamanio;
+        return this.cuerpo;
     }
     
     public void setTamanio(LinkedList<Integer> tamanio) {
-        this.tamanio = tamanio;
+        this.cuerpo = tamanio;
     }
 }
