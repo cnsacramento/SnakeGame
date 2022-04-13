@@ -14,6 +14,8 @@ public class Serpiente {
     
     private double posicionX;
     private double posicionY;
+    private double posicionAnteriorX;
+    private double posicionAnteriorY;
     private LinkedList<Integer> cuerpo;
     
     /* CONSTRUCTORES */
@@ -43,19 +45,40 @@ public class Serpiente {
         
         switch(accion) {
             case "UP": 
+                this.posicionAnteriorY = this.posicionY;
                 this.posicionY -= pasos;
                 break;
             case "DOWN":
+                this.posicionAnteriorY = this.posicionY;
                 this.posicionY += pasos;
                 break;
             case "LEFT":
+                this.posicionAnteriorX = this.posicionX;
                 this.posicionX -= pasos;
                 break;
             case "RIGHT":
+                this.posicionAnteriorX = this.posicionX;
                 this.posicionX += pasos;
                 break;
             default:
                 break;
+        }
+    }
+    
+    /**
+     * Metodo encargado de mantener en movimiento la serpiente
+     * @param pasos Cantidad de pasos que se mueve la serpiente
+     */
+    public void continuarMoviendo(double pasos) {
+        
+        if(this.posicionX < this.posicionAnteriorX) {
+            this.posicionX -= pasos;
+        }else if (this.posicionX > this.posicionAnteriorX) {
+            this.posicionX += pasos;
+        }else if(this.posicionY < this.posicionAnteriorY) {
+            this.posicionY -= pasos;
+        }else if(this.posicionY > this.posicionAnteriorY) {
+            this.posicionY += pasos;
         }
     }
     
@@ -83,6 +106,22 @@ public class Serpiente {
     
     public void setPosicionY(int posicionY) {
         this.posicionY = posicionY;
+    }
+    
+    public double getPosicionAnteriorX() {
+        return this.posicionAnteriorX;
+    }
+    
+    public void setPosicionAnteriorX(double posicionAnteriorX) {
+        this.posicionAnteriorX = posicionAnteriorX;
+    }
+    
+    public double getPosicionAnteriorY() {
+        return this.posicionAnteriorY;
+    }
+    
+    public void setPosicionAnteriorY(double posicionAnteriorY) {
+        this.posicionAnteriorY = posicionAnteriorY;
     }
     
     public LinkedList<Integer> getTamanio() {
