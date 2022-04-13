@@ -13,6 +13,7 @@ public class Escenario {
     private Serpiente serpiente;
     private double tamanioX;
     private double tamanioY;
+    private boolean colisionDetectada = false;
     
     
     /* CONSTRUCTORES */
@@ -42,6 +43,11 @@ public class Escenario {
     */
     public void detectarColision() {
         
+        if(serpiente.getPosicionX() >= this.tamanioX){
+            this.colisionDetectada = true;
+        }else if(serpiente.getPosicionY() >= this.tamanioY) {
+            this.colisionDetectada = true;
+        }
     }
     
     /**
@@ -76,4 +82,12 @@ public class Escenario {
     public void setTamanioY(int tamanioY) {
         this.tamanioY = tamanioY;
     }
+    
+    public boolean getColisionDetectada() {
+        return this.colisionDetectada;
+    }
+    
+    public void setColisionDetectada(boolean colisionDetectada) {
+        this.colisionDetectada = colisionDetectada;
+    } 
 }
