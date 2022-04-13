@@ -100,6 +100,22 @@ public class Escenario {
     public void setTamanioY(int tamanioY) {
         this.tamanioY = tamanioY;
     }
+
+    public double getManzanaX() {
+        return manzanaX;
+    }
+
+    public void setManzanaX(double manzanaX) {
+        this.manzanaX = manzanaX;
+    }
+
+    public double getManzanaY() {
+        return manzanaY;
+    }
+
+    public void setManzanaY(double manzanaY) {
+        this.manzanaY = manzanaY;
+    }
     
     public boolean getColisionDetectada() {
         return this.colisionDetectada;
