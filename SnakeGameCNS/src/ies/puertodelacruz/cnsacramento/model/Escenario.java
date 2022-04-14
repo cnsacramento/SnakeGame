@@ -90,8 +90,10 @@ public class Escenario {
         
         if(serpiente.getPosicionX() == manzanaX && serpiente.getPosicionY() == manzanaY) {
             generarManzana();
+            serpiente.aumentarTamanio();
         }else if(serpiente.getPosicionX() == manzanaX && serpiente.getPosicionY() == manzanaY) {
             generarManzana();
+            serpiente.aumentarTamanio();
         }
         
     }

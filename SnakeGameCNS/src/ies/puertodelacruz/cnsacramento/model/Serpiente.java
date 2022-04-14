@@ -165,6 +165,7 @@ public class Serpiente {
      */
     public void aumentarTamanio() {
         
+        
     }
     
     
