@@ -63,14 +63,8 @@ public class Escenario {
     */
     public void detectarColision() {
         
-        if(serpiente.getCabeza().getPosicionX() >= this.tamanioX || serpiente.getCabeza().getPosicionX() < 0){
-            this.colisionDetectada = true;
-            serpiente.bloquearMovimiento("TECLAS");
-        }else if(serpiente.getCabeza().getPosicionY() >= this.tamanioY || serpiente.getCabeza().getPosicionY() < 0) {
-            this.colisionDetectada = true;
-            serpiente.bloquearMovimiento("TECLAS");
-        }
-        
+        detectarAutochoque();
+        detectarMuro();
         detectarDigestion();
     }
     
@@ -97,8 +91,32 @@ public class Escenario {
             generarManzana();
             serpiente.aumentarTamanio();
         }
-        
     }
+    
+    /**
+     * Metodo que detecta colision con limite de la ventana
+     */
+    public void detectarMuro() {
+        
+        if(serpiente.getCabeza().getPosicionX() >= this.tamanioX || serpiente.getCabeza().getPosicionX() < 0){
+            this.colisionDetectada = true;
+            serpiente.bloquearMovimiento("TECLAS");
+        }else if(serpiente.getCabeza().getPosicionY() >= this.tamanioY || serpiente.getCabeza().getPosicionY() < 0) {
+            this.colisionDetectada = true;
+            serpiente.bloquearMovimiento("TECLAS");
+        }
+    }
+    
+    public void detectarAutochoque() {
+        
+        for (int i = 1; i < serpiente.getCuerpo().size(); i++) {
+            if (serpiente.getCabeza().getPosicionX() == serpiente.getCuerpo().get(i).getPosicionX() && serpiente.getCabeza().getPosicionY() == serpiente.getCuerpo().get(i).getPosicionY()) {
+                this.colisionDetectada = true;
+                serpiente.bloquearMovimiento("TECLAS");
+            }
+        }
+    }
+    
     
     /* GETTERS Y SETTERS */
     
