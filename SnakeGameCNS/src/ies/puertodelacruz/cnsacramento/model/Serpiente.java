@@ -234,6 +234,14 @@ public class Serpiente {
         this.bloquearContinuar = bloquearContinuar;
     }
 
+    public boolean isBloquearTeclas() {
+        return bloquearTeclas;
+    }
+
+    public void setBloquearTeclas(boolean bloquearTeclas) {
+        this.bloquearTeclas = bloquearTeclas;
+    }
+
     public double getPasos() {
         return pasos;
     }
