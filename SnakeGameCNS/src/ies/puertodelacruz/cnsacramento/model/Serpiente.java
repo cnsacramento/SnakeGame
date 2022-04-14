@@ -180,6 +180,9 @@ public class Serpiente {
         refrescarPosiciones();
     }
     
+    /***
+     * Metodo que actualiza la ultima posicion de cada bloque de la serpiente
+     */
     public void refrescarPosiciones() {
         
         for (int i = 1; i < cuerpo.size(); i++) {

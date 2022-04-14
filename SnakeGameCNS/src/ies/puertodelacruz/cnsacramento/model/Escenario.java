@@ -107,6 +107,9 @@ public class Escenario {
         }
     }
     
+    /**
+     * Metodo que detecta si la serpiente se choca consigo misma
+     */
     public void detectarAutochoque() {
         
         for (int i = 1; i < serpiente.getCuerpo().size(); i++) {

@@ -5,7 +5,7 @@
 package ies.puertodelacruz.cnsacramento.model;
 
 /**
- *
+ * Clase encargada de generar objetos con una cierta posicion
  * @author christian
  */
 public class Bloque {
@@ -15,13 +15,28 @@ public class Bloque {
     private double posicionAnteriorX;
     private double posicionAnteriorY;
 
+    /***
+     * Constructor por defecto sin parametros
+     */
     public Bloque(){}
     
+    /**
+     * Constructor que recibe 2 parametros
+     * @param posicionX Posicion sobre el eje X
+     * @param posicionY Posicion sobre el eje Y
+     */
     public Bloque(double posicionX, double posicionY) {
         this.posicionX = posicionX;
         this.posicionY = posicionY;
     }
 
+    /**
+     * Constructor que recibe 4 parametros
+     * @param posicionX Posicion sobre el eje X
+     * @param posicionY Posicion sobre el eje Y
+     * @param posicionAnteriorX Posicion anterior a la actual
+     * @param posicionAnteriorY  Posicion anterior a la actual
+     */
     public Bloque(double posicionX, double posicionY, double posicionAnteriorX, double posicionAnteriorY) {
         this.posicionX = posicionX;
         this.posicionY = posicionY;
