@@ -22,6 +22,15 @@ public class Bloque {
         this.posicionY = posicionY;
     }
 
+    public Bloque(double posicionX, double posicionY, double posicionAnteriorX, double posicionAnteriorY) {
+        this.posicionX = posicionX;
+        this.posicionY = posicionY;
+        this.posicionAnteriorX = posicionAnteriorX;
+        this.posicionAnteriorY = posicionAnteriorY;
+    }
+    
+    
+
     public double getPosicionX() {
         return posicionX;
     }

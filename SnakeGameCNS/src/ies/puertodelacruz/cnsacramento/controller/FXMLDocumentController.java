@@ -47,10 +47,18 @@ public class FXMLDocumentController implements Initializable {
         serpiente = escenario.getSerpiente();
         System.out.println("Escenario tamaño -> (" + escenario.getTamanioX() + "," + escenario.getTamanioY() + ")");
         graficos = escenarioCanvas.getGraphicsContext2D();
+        for (int i = 0; i < serpiente.getCuerpo().size(); i++) {
+            graficos.fillRect(
+                serpiente.getCuerpo().get(i).getPosicionX(), serpiente.getCuerpo().get(i).getPosicionY(), 
+                dimensionSerpiente, dimensionSerpiente
+            );
+            
+        }
+        /*
         graficos.fillRect(
                 serpiente.getCabeza().getPosicionX(), serpiente.getCabeza().getPosicionY(), 
                 dimensionSerpiente, dimensionSerpiente
-        );
+        );*/
         graficos.fillOval(escenario.getManzanaX(), escenario.getManzanaY(), dimensionSerpiente, dimensionSerpiente);
         mostrarGraficos();
         System.out.println("MANZANA -> (" + escenario.getManzanaX() + ", " + escenario.getManzanaY() + ")");
@@ -76,8 +84,21 @@ public class FXMLDocumentController implements Initializable {
                 }else {
                     graficos.clearRect(0, 0, escenarioCanvas.getWidth(), escenarioCanvas.getHeight());
                     serpiente.continuarMoviendo();
+                    for (int i = 0; i < serpiente.getCuerpo().size(); i++) {
+                        graficos.fillRect(
+                                serpiente.getCuerpo().get(i).getPosicionX(), serpiente.getCuerpo().get(i).getPosicionY(),
+                                dimensionSerpiente, dimensionSerpiente
+                        );
+                        System.out.println(
+                                "COORDENADAS: \" " + i + "\" -> (" +
+                                serpiente.getCuerpo().get(i).getPosicionAnteriorX() 
+                                + ", " + serpiente.getCuerpo().get(i).getPosicionAnteriorY()
+                        );
+
+                    }
+                    /*
                     graficos.fillRect(serpiente.getCabeza().getPosicionX(), serpiente.getCabeza().getPosicionY()
-                            , dimensionSerpiente, dimensionSerpiente);
+                            , dimensionSerpiente, dimensionSerpiente);*/
                     graficos.fillOval(escenario.getManzanaX(), escenario.getManzanaY(), dimensionSerpiente, dimensionSerpiente);
                     escenario.detectarColision();
                 }
@@ -97,22 +118,18 @@ public class FXMLDocumentController implements Initializable {
             case UP:
                 System.out.println("Subiendo...");
                 serpiente.mover("UP");
-                System.out.println("Posicion serpiente -> (" + serpiente.getCabeza().getPosicionX() + ", " + serpiente.getCabeza().getPosicionY() + ")");
                 break;
             case DOWN:
                 System.out.println("Bajando...");
                 serpiente.mover("DOWN");
-                System.out.println("Posicion serpiente -> (" + serpiente.getCabeza().getPosicionX() + ", " + serpiente.getCabeza().getPosicionY() + ")");
                 break;
             case LEFT:
                 System.out.println("Izquierda...");
                 serpiente.mover("LEFT");
-                System.out.println("Posicion serpiente -> (" + serpiente.getCabeza().getPosicionX() + ", " + serpiente.getCabeza().getPosicionY() + ")");
                 break;
             case RIGHT:
                 System.out.println("Derecha...");
                 serpiente.mover("RIGHT");
-                System.out.println("Posicion serpiente -> (" + serpiente.getCabeza().getPosicionX() + ", " + serpiente.getCabeza().getPosicionY() + ")");
                 break;
             default:
                 break;

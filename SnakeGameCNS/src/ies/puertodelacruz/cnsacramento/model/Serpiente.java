@@ -40,7 +40,7 @@ public class Serpiente {
     public Serpiente(double posicionX, double posicionY) {
         
         cabeza = new Bloque(posicionX,posicionY);
-        cuerpo.add(0,cabeza);
+        cuerpo.add(cabeza);
     }
     
     /**
@@ -72,6 +72,7 @@ public class Serpiente {
                         cabeza.setPosicionAnteriorY(cabeza.getPosicionY());
                         cabeza.setPosicionY(cabeza.getPosicionY() - pasos);
                         cabeza.setPosicionAnteriorX(cabeza.getPosicionX());
+                        refrescarPosiciones();
                         this.bloquearContinuar = true;
                     }
                     bloquearMovimiento("UD");
@@ -81,6 +82,7 @@ public class Serpiente {
                         cabeza.setPosicionAnteriorY(cabeza.getPosicionY());
                         cabeza.setPosicionY(cabeza.getPosicionY() + pasos);
                         cabeza.setPosicionAnteriorX(cabeza.getPosicionX());
+                        refrescarPosiciones();
                         this.bloquearContinuar = true;
                     }
                     bloquearMovimiento("UD");
@@ -90,6 +92,7 @@ public class Serpiente {
                         cabeza.setPosicionAnteriorX(cabeza.getPosicionX());
                         cabeza.setPosicionX(cabeza.getPosicionX() - pasos);
                         cabeza.setPosicionAnteriorY(cabeza.getPosicionY());
+                        refrescarPosiciones();
                         this.bloquearContinuar = true;
                     }
                     bloquearMovimiento("LR");
@@ -99,6 +102,7 @@ public class Serpiente {
                         cabeza.setPosicionAnteriorX(cabeza.getPosicionX());
                         cabeza.setPosicionX(cabeza.getPosicionX() + pasos);
                         cabeza.setPosicionAnteriorY(cabeza.getPosicionY());
+                        refrescarPosiciones();
                         this.bloquearContinuar = true;
                     }
                     bloquearMovimiento("LR");
@@ -145,15 +149,19 @@ public class Serpiente {
             if (cabeza.getPosicionX() < cabeza.getPosicionAnteriorX()) {
                 cabeza.setPosicionAnteriorX(cabeza.getPosicionX());
                 cabeza.setPosicionX(cabeza.getPosicionX() - pasos);
+                refrescarPosiciones();
             } else if (cabeza.getPosicionX() > cabeza.getPosicionAnteriorX()) {
                 cabeza.setPosicionAnteriorX(cabeza.getPosicionX());
                 cabeza.setPosicionX(cabeza.getPosicionX() + pasos);
+                refrescarPosiciones();
             } else if (cabeza.getPosicionY() < cabeza.getPosicionAnteriorY()) {
                 cabeza.setPosicionAnteriorY(cabeza.getPosicionY());
                 cabeza.setPosicionY(cabeza.getPosicionY() - pasos);
+                refrescarPosiciones();
             } else if (cabeza.getPosicionY() > cabeza.getPosicionAnteriorY()) {
                 cabeza.setPosicionAnteriorY(cabeza.getPosicionY());
                 cabeza.setPosicionY(cabeza.getPosicionY() + pasos);
+                refrescarPosiciones();
             }
         }
         
@@ -166,9 +174,38 @@ public class Serpiente {
      */
     public void aumentarTamanio() {
         
-        
+        double posUltimoBloX = cuerpo.get(cuerpo.size() - 1).getPosicionAnteriorX();
+        double posultimoBloY = cuerpo.get(cuerpo.size() - 1).getPosicionAnteriorY();
+        cuerpo.add( new Bloque(posUltimoBloX, posUltimoBloX,posUltimoBloX,posultimoBloY ));
     }
     
+    public void refrescarPosiciones() {
+        
+        for (int i = 1; i < cuerpo.size(); i++) {
+            cuerpo.get(i).setPosicionAnteriorX(cuerpo.get(i).getPosicionX());
+            cuerpo.get(i).setPosicionAnteriorY(cuerpo.get(i).getPosicionY());
+            cuerpo.get(i).setPosicionX(cuerpo.get(i - 1).getPosicionAnteriorX());
+            cuerpo.get(i).setPosicionY(cuerpo.get(i - 1).getPosicionAnteriorY());
+        }
+    }
+    
+    
+    public void asignarPosAnterior() {
+        
+        for (int i = 1; i < cuerpo.size(); i++) {
+            double diferenciaPosX = cuerpo.get(i).getPosicionX() - cuerpo.get(i).getPosicionAnteriorX();
+            double diferenciaPosY = cuerpo.get(i).getPosicionY() - cuerpo.get(i).getPosicionAnteriorY();
+            if (cuerpo.get(i).getPosicionX() < cuerpo.get(i).getPosicionAnteriorX() && diferenciaPosX > pasos) {
+                cuerpo.get(i).setPosicionAnteriorX(cuerpo.get(i).getPosicionX() - pasos);
+            } else if (cuerpo.get(i).getPosicionX() > cuerpo.get(i).getPosicionAnteriorX()) {
+                cuerpo.get(i).setPosicionAnteriorX(cuerpo.get(i).getPosicionX() + pasos);
+            }else if (cuerpo.get(i).getPosicionY() < cuerpo.get(i).getPosicionAnteriorY() && diferenciaPosY > pasos) {
+                cuerpo.get(i).setPosicionAnteriorY(cuerpo.get(i).getPosicionY() - pasos);
+            } else if (cuerpo.get(i).getPosicionY() > cuerpo.get(i).getPosicionAnteriorY()) {
+                cuerpo.get(i).setPosicionAnteriorY(cuerpo.get(i).getPosicionY() + pasos);
+            }
+        }
+    }
     
     /* GETTERS Y SETTERS */
 
