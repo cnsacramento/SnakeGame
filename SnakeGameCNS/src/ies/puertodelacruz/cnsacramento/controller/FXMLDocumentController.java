@@ -47,7 +47,10 @@ public class FXMLDocumentController implements Initializable {
         serpiente = escenario.getSerpiente();
         System.out.println("Escenario tamaño -> (" + escenario.getTamanioX() + "," + escenario.getTamanioY() + ")");
         graficos = escenarioCanvas.getGraphicsContext2D();
-        graficos.fillRect(serpiente.getPosicionX(), serpiente.getPosicionY(), dimensionSerpiente, dimensionSerpiente);
+        graficos.fillRect(
+                serpiente.getCabeza().getPosicionX(), serpiente.getCabeza().getPosicionY(), 
+                dimensionSerpiente, dimensionSerpiente
+        );
         graficos.fillOval(escenario.getManzanaX(), escenario.getManzanaY(), dimensionSerpiente, dimensionSerpiente);
         mostrarGraficos();
         System.out.println("MANZANA -> (" + escenario.getManzanaX() + ", " + escenario.getManzanaY() + ")");
@@ -63,14 +66,18 @@ public class FXMLDocumentController implements Initializable {
                 
                 escenario.detectarColision();
                 if (escenario.getColisionDetectada()) {
-                    graficos.fillRect(serpiente.getPosicionAnteriorX(), serpiente.getPosicionAnteriorY(), dimensionSerpiente, dimensionSerpiente);
+                    graficos.fillRect(
+                            serpiente.getCabeza().getPosicionAnteriorX(), serpiente.getCabeza().getPosicionAnteriorY()
+                            , dimensionSerpiente, dimensionSerpiente
+                    );
                     graficos.fillOval(escenario.getManzanaX(), escenario.getManzanaY(), dimensionSerpiente, dimensionSerpiente);
                     fps.stop();
                     System.out.println("GAME OVER");
                 }else {
                     graficos.clearRect(0, 0, escenarioCanvas.getWidth(), escenarioCanvas.getHeight());
                     serpiente.continuarMoviendo();
-                    graficos.fillRect(serpiente.getPosicionX(), serpiente.getPosicionY(), dimensionSerpiente, dimensionSerpiente);
+                    graficos.fillRect(serpiente.getCabeza().getPosicionX(), serpiente.getCabeza().getPosicionY()
+                            , dimensionSerpiente, dimensionSerpiente);
                     graficos.fillOval(escenario.getManzanaX(), escenario.getManzanaY(), dimensionSerpiente, dimensionSerpiente);
                     escenario.detectarColision();
                 }
@@ -90,22 +97,22 @@ public class FXMLDocumentController implements Initializable {
             case UP:
                 System.out.println("Subiendo...");
                 serpiente.mover("UP");
-                System.out.println("Posicion serpiente -> (" + serpiente.getPosicionX() + ", " + serpiente.getPosicionY() + ")");
+                System.out.println("Posicion serpiente -> (" + serpiente.getCabeza().getPosicionX() + ", " + serpiente.getCabeza().getPosicionY() + ")");
                 break;
             case DOWN:
                 System.out.println("Bajando...");
                 serpiente.mover("DOWN");
-                System.out.println("Posicion serpiente -> (" + serpiente.getPosicionX() + ", " + serpiente.getPosicionY() + ")");
+                System.out.println("Posicion serpiente -> (" + serpiente.getCabeza().getPosicionX() + ", " + serpiente.getCabeza().getPosicionY() + ")");
                 break;
             case LEFT:
                 System.out.println("Izquierda...");
                 serpiente.mover("LEFT");
-                System.out.println("Posicion serpiente -> (" + serpiente.getPosicionX() + ", " + serpiente.getPosicionY() + ")");
+                System.out.println("Posicion serpiente -> (" + serpiente.getCabeza().getPosicionX() + ", " + serpiente.getCabeza().getPosicionY() + ")");
                 break;
             case RIGHT:
                 System.out.println("Derecha...");
                 serpiente.mover("RIGHT");
-                System.out.println("Posicion serpiente -> (" + serpiente.getPosicionX() + ", " + serpiente.getPosicionY() + ")");
+                System.out.println("Posicion serpiente -> (" + serpiente.getCabeza().getPosicionX() + ", " + serpiente.getCabeza().getPosicionY() + ")");
                 break;
             default:
                 break;

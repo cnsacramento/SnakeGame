@@ -12,17 +12,18 @@ import java.util.LinkedList;
  */
 public class Serpiente {
     
-    private double posicionX;
+    /*private double posicionX;
     private double posicionY;
     private double posicionAnteriorX;
-    private double posicionAnteriorY;
+    private double posicionAnteriorY;*/
+    private Bloque cabeza;
     private double pasos;
     private boolean enMovimiento = false;
     private boolean bloquearContinuar = false;
     private boolean bloqueoUD = false;
     private boolean bloqueoLR = false;
     private boolean bloquearTeclas = false;
-    private LinkedList<Integer> cuerpo;
+    private LinkedList<Bloque> cuerpo = new LinkedList<Bloque>();
     
     /* CONSTRUCTORES */
     
@@ -38,8 +39,8 @@ public class Serpiente {
      */
     public Serpiente(double posicionX, double posicionY) {
         
-        this.posicionX = posicionX;
-        this.posicionY = posicionY;
+        cabeza = new Bloque(posicionX,posicionY);
+        cuerpo.add(0,cabeza);
     }
     
     /**
@@ -68,36 +69,36 @@ public class Serpiente {
             switch(accion) {
                 case "UP": 
                     if(!bloqueoUD) {
-                        this.posicionAnteriorY = this.posicionY;
-                        this.posicionY -= this.pasos;
-                        this.posicionAnteriorX = this.posicionX;
+                        cabeza.setPosicionAnteriorY(cabeza.getPosicionY());
+                        cabeza.setPosicionY(cabeza.getPosicionY() - pasos);
+                        cabeza.setPosicionAnteriorX(cabeza.getPosicionX());
                         this.bloquearContinuar = true;
                     }
                     bloquearMovimiento("UD");
                     break;
                 case "DOWN":
                     if(!bloqueoUD) {
-                        this.posicionAnteriorY = this.posicionY;
-                        this.posicionY += this.pasos;
-                        this.posicionAnteriorX = this.posicionX;
+                        cabeza.setPosicionAnteriorY(cabeza.getPosicionY());
+                        cabeza.setPosicionY(cabeza.getPosicionY() + pasos);
+                        cabeza.setPosicionAnteriorX(cabeza.getPosicionX());
                         this.bloquearContinuar = true;
                     }
                     bloquearMovimiento("UD");
                     break;
                 case "LEFT":
                     if(!bloqueoLR) {
-                        this.posicionAnteriorX = this.posicionX;
-                        this.posicionX -= this.pasos;
-                        this.posicionAnteriorY = this.posicionY;
+                        cabeza.setPosicionAnteriorX(cabeza.getPosicionX());
+                        cabeza.setPosicionX(cabeza.getPosicionX() - pasos);
+                        cabeza.setPosicionAnteriorY(cabeza.getPosicionY());
                         this.bloquearContinuar = true;
                     }
                     bloquearMovimiento("LR");
                     break;
                 case "RIGHT":
                     if(!bloqueoLR) {
-                        this.posicionAnteriorX = this.posicionX;
-                        this.posicionX += this.pasos;
-                        this.posicionAnteriorY = this.posicionY;
+                        cabeza.setPosicionAnteriorX(cabeza.getPosicionX());
+                        cabeza.setPosicionX(cabeza.getPosicionX() + pasos);
+                        cabeza.setPosicionAnteriorY(cabeza.getPosicionY());
                         this.bloquearContinuar = true;
                     }
                     bloquearMovimiento("LR");
@@ -141,18 +142,18 @@ public class Serpiente {
     public void continuarMoviendo() {
         
         if(!bloquearContinuar) {
-            if (this.posicionX < this.posicionAnteriorX) {
-                this.posicionAnteriorX = this.posicionX;
-                this.posicionX -= this.pasos;
-            } else if (this.posicionX > this.posicionAnteriorX) {
-                this.posicionAnteriorX = this.posicionX;
-                this.posicionX += this.pasos;
-            } else if (this.posicionY < this.posicionAnteriorY) {
-                this.posicionAnteriorY = this.posicionY;
-                this.posicionY -= this.pasos;
-            } else if (this.posicionY > this.posicionAnteriorY) {
-                this.posicionAnteriorY = this.posicionY;
-                this.posicionY += this.pasos;
+            if (cabeza.getPosicionX() < cabeza.getPosicionAnteriorX()) {
+                cabeza.setPosicionAnteriorX(cabeza.getPosicionX());
+                cabeza.setPosicionX(cabeza.getPosicionX() - pasos);
+            } else if (cabeza.getPosicionX() > cabeza.getPosicionAnteriorX()) {
+                cabeza.setPosicionAnteriorX(cabeza.getPosicionX());
+                cabeza.setPosicionX(cabeza.getPosicionX() + pasos);
+            } else if (cabeza.getPosicionY() < cabeza.getPosicionAnteriorY()) {
+                cabeza.setPosicionAnteriorY(cabeza.getPosicionY());
+                cabeza.setPosicionY(cabeza.getPosicionY() - pasos);
+            } else if (cabeza.getPosicionY() > cabeza.getPosicionAnteriorY()) {
+                cabeza.setPosicionAnteriorY(cabeza.getPosicionY());
+                cabeza.setPosicionY(cabeza.getPosicionY() + pasos);
             }
         }
         
@@ -170,37 +171,13 @@ public class Serpiente {
     
     
     /* GETTERS Y SETTERS */
-    
-    public double getPosicionX() {
-        return this.posicionX;
+
+    public Bloque getCabeza() {
+        return cabeza;
     }
-    
-    public void setPosicionX(int posicionX) {
-        this.posicionX = posicionX;
-    }
-    
-    public double getPosicionY() {
-        return this.posicionY;
-    }
-    
-    public void setPosicionY(int posicionY) {
-        this.posicionY = posicionY;
-    }
-    
-    public double getPosicionAnteriorX() {
-        return this.posicionAnteriorX;
-    }
-    
-    public void setPosicionAnteriorX(double posicionAnteriorX) {
-        this.posicionAnteriorX = posicionAnteriorX;
-    }
-    
-    public double getPosicionAnteriorY() {
-        return this.posicionAnteriorY;
-    }
-    
-    public void setPosicionAnteriorY(double posicionAnteriorY) {
-        this.posicionAnteriorY = posicionAnteriorY;
+
+    public void setCabeza(Bloque cabeza) {
+        this.cabeza = cabeza;
     }
     
     public boolean getEnMovimiento(){
@@ -251,11 +228,11 @@ public class Serpiente {
         this.pasos = pasos;
     }
 
-    public LinkedList<Integer> getCuerpo() {
+    public LinkedList<Bloque> getCuerpo() {
         return cuerpo;
     }
 
-    public void setCuerpo(LinkedList<Integer> cuerpo) {
+    public void setCuerpo(LinkedList<Bloque> cuerpo) {
         this.cuerpo = cuerpo;
     }
 }

@@ -62,10 +62,10 @@ public class Escenario {
     */
     public void detectarColision() {
         
-        if(serpiente.getPosicionX() >= this.tamanioX || serpiente.getPosicionX() < 0){
+        if(serpiente.getCabeza().getPosicionX() >= this.tamanioX || serpiente.getCabeza().getPosicionX() < 0){
             this.colisionDetectada = true;
             serpiente.bloquearMovimiento("TECLAS");
-        }else if(serpiente.getPosicionY() >= this.tamanioY || serpiente.getPosicionY() < 0) {
+        }else if(serpiente.getCabeza().getPosicionY() >= this.tamanioY || serpiente.getCabeza().getPosicionY() < 0) {
             this.colisionDetectada = true;
             serpiente.bloquearMovimiento("TECLAS");
         }
@@ -88,10 +88,10 @@ public class Escenario {
      */
     public void detectarDigestion() {
         
-        if(serpiente.getPosicionX() == manzanaX && serpiente.getPosicionY() == manzanaY) {
+        if(serpiente.getCabeza().getPosicionX() == manzanaX && serpiente.getCabeza().getPosicionY() == manzanaY) {
             generarManzana();
             serpiente.aumentarTamanio();
-        }else if(serpiente.getPosicionX() == manzanaX && serpiente.getPosicionY() == manzanaY) {
+        }else if(serpiente.getCabeza().getPosicionX() == manzanaX && serpiente.getCabeza().getPosicionY() == manzanaY) {
             generarManzana();
             serpiente.aumentarTamanio();
         }
