@@ -60,20 +60,20 @@ public class FXMLDocumentController implements Initializable {
         fps.setCycleCount(Animation.INDEFINITE);
         fps.getKeyFrames().add(new KeyFrame(Duration.millis(VELOCIDAD_JUEGO), (t) -> {
             if(serpiente.getEnMovimiento()) {
-                graficos.clearRect(0, 0, escenarioCanvas.getWidth(), escenarioCanvas.getHeight());
+                
+                escenario.detectarColision();
                 if (escenario.getColisionDetectada()) {
                     graficos.fillRect(serpiente.getPosicionAnteriorX(), serpiente.getPosicionAnteriorY(), dimensionSerpiente, dimensionSerpiente);
                     graficos.fillOval(escenario.getManzanaX(), escenario.getManzanaY(), dimensionSerpiente, dimensionSerpiente);
                     fps.stop();
                     System.out.println("GAME OVER");
-
+                }else {
+                    graficos.clearRect(0, 0, escenarioCanvas.getWidth(), escenarioCanvas.getHeight());
+                    serpiente.continuarMoviendo();
+                    graficos.fillRect(serpiente.getPosicionX(), serpiente.getPosicionY(), dimensionSerpiente, dimensionSerpiente);
+                    graficos.fillOval(escenario.getManzanaX(), escenario.getManzanaY(), dimensionSerpiente, dimensionSerpiente);
+                    escenario.detectarColision();
                 }
-                System.out.println(escenario.getColisionDetectada());
-
-                serpiente.continuarMoviendo();
-                escenario.detectarColision();
-                graficos.fillRect(serpiente.getPosicionX(), serpiente.getPosicionY(), dimensionSerpiente, dimensionSerpiente);
-                graficos.fillOval(escenario.getManzanaX(), escenario.getManzanaY(), dimensionSerpiente, dimensionSerpiente);
             }
            
         }));
