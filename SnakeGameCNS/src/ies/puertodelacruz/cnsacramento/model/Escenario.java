@@ -64,8 +64,10 @@ public class Escenario {
         
         if(serpiente.getPosicionX() >= this.tamanioX || serpiente.getPosicionX() < 0){
             this.colisionDetectada = true;
+            serpiente.bloquearMovimiento("TECLAS");
         }else if(serpiente.getPosicionY() >= this.tamanioY || serpiente.getPosicionY() < 0) {
             this.colisionDetectada = true;
+            serpiente.bloquearMovimiento("TECLAS");
         }
         
         detectarDigestion();

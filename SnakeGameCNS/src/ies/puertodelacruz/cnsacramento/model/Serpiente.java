@@ -21,6 +21,7 @@ public class Serpiente {
     private boolean bloquearContinuar = false;
     private boolean bloqueoUD = false;
     private boolean bloqueoLR = false;
+    private boolean bloquearTeclas = false;
     private LinkedList<Integer> cuerpo;
     
     /* CONSTRUCTORES */
@@ -62,45 +63,48 @@ public class Serpiente {
         
         this.enMovimiento = true;
         
-        switch(accion) {
-            case "UP": 
-                if(!bloqueoUD) {
-                    this.posicionAnteriorY = this.posicionY;
-                    this.posicionY -= this.pasos;
-                    this.posicionAnteriorX = this.posicionX;
-                    this.bloquearContinuar = true;
-                }
-                bloquearMovimiento("UD");
-                break;
-            case "DOWN":
-                if(!bloqueoUD) {
-                    this.posicionAnteriorY = this.posicionY;
-                    this.posicionY += this.pasos;
-                    this.posicionAnteriorX = this.posicionX;
-                    this.bloquearContinuar = true;
-                }
-                bloquearMovimiento("UD");
-                break;
-            case "LEFT":
-                if(!bloqueoLR) {
-                    this.posicionAnteriorX = this.posicionX;
-                    this.posicionX -= this.pasos;
-                    this.posicionAnteriorY = this.posicionY;
-                    this.bloquearContinuar = true;
-                }
-                bloquearMovimiento("LR");
-                break;
-            case "RIGHT":
-                if(!bloqueoLR) {
-                    this.posicionAnteriorX = this.posicionX;
-                    this.posicionX += this.pasos;
-                    this.posicionAnteriorY = this.posicionY;
-                    this.bloquearContinuar = true;
-                }
-                bloquearMovimiento("LR");
-                break;
-            default:
-                break;
+        if(!bloquearTeclas) {
+            
+            switch(accion) {
+                case "UP": 
+                    if(!bloqueoUD) {
+                        this.posicionAnteriorY = this.posicionY;
+                        this.posicionY -= this.pasos;
+                        this.posicionAnteriorX = this.posicionX;
+                        this.bloquearContinuar = true;
+                    }
+                    bloquearMovimiento("UD");
+                    break;
+                case "DOWN":
+                    if(!bloqueoUD) {
+                        this.posicionAnteriorY = this.posicionY;
+                        this.posicionY += this.pasos;
+                        this.posicionAnteriorX = this.posicionX;
+                        this.bloquearContinuar = true;
+                    }
+                    bloquearMovimiento("UD");
+                    break;
+                case "LEFT":
+                    if(!bloqueoLR) {
+                        this.posicionAnteriorX = this.posicionX;
+                        this.posicionX -= this.pasos;
+                        this.posicionAnteriorY = this.posicionY;
+                        this.bloquearContinuar = true;
+                    }
+                    bloquearMovimiento("LR");
+                    break;
+                case "RIGHT":
+                    if(!bloqueoLR) {
+                        this.posicionAnteriorX = this.posicionX;
+                        this.posicionX += this.pasos;
+                        this.posicionAnteriorY = this.posicionY;
+                        this.bloquearContinuar = true;
+                    }
+                    bloquearMovimiento("LR");
+                    break;
+                default:
+                    break;
+            }
         }
     }
     
@@ -121,6 +125,10 @@ public class Serpiente {
                 break;
             case "CONT":
                 this.bloquearContinuar = false;
+                break;
+            case "TECLAS":
+                this.bloquearTeclas = true;
+                break;
             default:
                 break;
         }
