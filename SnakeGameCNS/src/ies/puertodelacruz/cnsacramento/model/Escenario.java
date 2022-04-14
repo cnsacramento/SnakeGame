@@ -68,9 +68,7 @@ public class Escenario {
             this.colisionDetectada = true;
         }
         
-        if(serpiente.getPosicionX() == manzanaX && serpiente.getPosicionY() == manzanaY) {
-            generarManzana();
-        }
+        detectarDigestion();
     }
     
     
@@ -87,6 +85,12 @@ public class Escenario {
      * Metodo encargado de detectar cuando la serpiente come
      */
     public void detectarDigestion() {
+        
+        if(serpiente.getPosicionX() == manzanaX && serpiente.getPosicionY() == manzanaY) {
+            generarManzana();
+        }else if(serpiente.getPosicionX() == manzanaX && serpiente.getPosicionY() == manzanaY) {
+            generarManzana();
+        }
         
     }
     
