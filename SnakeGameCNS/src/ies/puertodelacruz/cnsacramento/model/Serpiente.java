@@ -4,7 +4,7 @@
  */
 package ies.puertodelacruz.cnsacramento.model;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 /**
  * 
@@ -23,7 +23,7 @@ public class Serpiente {
     private boolean bloqueoUD = false;
     private boolean bloqueoLR = false;
     private boolean bloquearTeclas = false;
-    private LinkedList<Bloque> cuerpo = new LinkedList<Bloque>();
+    private ArrayList<Bloque> cuerpo = new ArrayList<Bloque>();
     
     /* CONSTRUCTORES */
     
@@ -177,6 +177,7 @@ public class Serpiente {
         double posUltimoBloX = cuerpo.get(cuerpo.size() - 1).getPosicionAnteriorX();
         double posultimoBloY = cuerpo.get(cuerpo.size() - 1).getPosicionAnteriorY();
         cuerpo.add( new Bloque(posUltimoBloX, posUltimoBloX,posUltimoBloX,posultimoBloY ));
+        refrescarPosiciones();
     }
     
     public void refrescarPosiciones() {
@@ -247,11 +248,11 @@ public class Serpiente {
         this.pasos = pasos;
     }
 
-    public LinkedList<Bloque> getCuerpo() {
+    public ArrayList<Bloque> getCuerpo() {
         return cuerpo;
     }
 
-    public void setCuerpo(LinkedList<Bloque> cuerpo) {
+    public void setCuerpo(ArrayList<Bloque> cuerpo) {
         this.cuerpo = cuerpo;
     }
 }

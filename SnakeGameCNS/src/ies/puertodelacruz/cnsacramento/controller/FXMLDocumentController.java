@@ -59,9 +59,9 @@ public class FXMLDocumentController implements Initializable {
                 serpiente.getCabeza().getPosicionX(), serpiente.getCabeza().getPosicionY(), 
                 dimensionSerpiente, dimensionSerpiente
         );*/
-        graficos.fillOval(escenario.getManzanaX(), escenario.getManzanaY(), dimensionSerpiente, dimensionSerpiente);
+        graficos.fillOval(escenario.getManzana().getPosicionX(), escenario.getManzana().getPosicionY(), dimensionSerpiente, dimensionSerpiente);
         mostrarGraficos();
-        System.out.println("MANZANA -> (" + escenario.getManzanaX() + ", " + escenario.getManzanaY() + ")");
+        System.out.println("MANZANA -> (" + escenario.getManzana().getPosicionX()+ ", " + escenario.getManzana().getPosicionY()+ ")");
     }
 
     
@@ -78,7 +78,7 @@ public class FXMLDocumentController implements Initializable {
                             serpiente.getCabeza().getPosicionAnteriorX(), serpiente.getCabeza().getPosicionAnteriorY()
                             , dimensionSerpiente, dimensionSerpiente
                     );
-                    graficos.fillOval(escenario.getManzanaX(), escenario.getManzanaY(), dimensionSerpiente, dimensionSerpiente);
+                    graficos.fillOval(escenario.getManzana().getPosicionX(), escenario.getManzana().getPosicionY(), dimensionSerpiente, dimensionSerpiente);
                     fps.stop();
                     System.out.println("GAME OVER");
                 }else {
@@ -98,7 +98,7 @@ public class FXMLDocumentController implements Initializable {
                     /*
                     graficos.fillRect(serpiente.getCabeza().getPosicionX(), serpiente.getCabeza().getPosicionY()
                             , dimensionSerpiente, dimensionSerpiente);*/
-                    graficos.fillOval(escenario.getManzanaX(), escenario.getManzanaY(), dimensionSerpiente, dimensionSerpiente);
+                    graficos.fillOval(escenario.getManzana().getPosicionX(), escenario.getManzana().getPosicionY(), dimensionSerpiente, dimensionSerpiente);
                     escenario.detectarColision();
                 }
             }

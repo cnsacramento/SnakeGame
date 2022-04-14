@@ -15,8 +15,9 @@ public class Escenario {
     private Serpiente serpiente;
     private double tamanioX;
     private double tamanioY;
-    private double manzanaX;
-    private double manzanaY;
+    private Bloque manzana;
+    //private double manzanaX;
+    //private double manzanaY;
     private boolean colisionDetectada = false;
     
     
@@ -79,8 +80,9 @@ public class Escenario {
      */
     public void generarManzana() {
         Random rnd = new Random();
-        manzanaX = rnd.nextInt( (int) (tamanioX / serpiente.getPasos()) ) * serpiente.getPasos();
-        manzanaY = rnd.nextInt((int) (tamanioY / serpiente.getPasos()) ) * serpiente.getPasos();
+        double manzanaX = rnd.nextInt( (int) (tamanioX / serpiente.getPasos()) ) * serpiente.getPasos();
+        double manzanaY = rnd.nextInt((int) (tamanioY / serpiente.getPasos()) ) * serpiente.getPasos();
+        manzana = new Bloque(manzanaX,manzanaY);
     }
     
     /**
@@ -88,10 +90,10 @@ public class Escenario {
      */
     public void detectarDigestion() {
         
-        if(serpiente.getCabeza().getPosicionX() == manzanaX && serpiente.getCabeza().getPosicionY() == manzanaY) {
+        if(serpiente.getCabeza().getPosicionX() == manzana.getPosicionX() && serpiente.getCabeza().getPosicionY() == manzana.getPosicionY()) {
             generarManzana();
             serpiente.aumentarTamanio();
-        }else if(serpiente.getCabeza().getPosicionX() == manzanaX && serpiente.getCabeza().getPosicionY() == manzanaY) {
+        }else if(serpiente.getCabeza().getPosicionX() == manzana.getPosicionX() && serpiente.getCabeza().getPosicionY() == manzana.getPosicionY()) {
             generarManzana();
             serpiente.aumentarTamanio();
         }
@@ -124,6 +126,16 @@ public class Escenario {
         this.tamanioY = tamanioY;
     }
 
+    public Bloque getManzana() {
+        return manzana;
+    }
+
+    public void setManzana(Bloque manzana) {
+        this.manzana = manzana;
+    }
+    
+    
+    /*
     public double getManzanaX() {
         return manzanaX;
     }
@@ -138,7 +150,7 @@ public class Escenario {
 
     public void setManzanaY(double manzanaY) {
         this.manzanaY = manzanaY;
-    }
+    }*/
     
     public boolean getColisionDetectada() {
         return this.colisionDetectada;
