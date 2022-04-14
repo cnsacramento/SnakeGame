@@ -189,24 +189,6 @@ public class Serpiente {
         }
     }
     
-    
-    public void asignarPosAnterior() {
-        
-        for (int i = 1; i < cuerpo.size(); i++) {
-            double diferenciaPosX = cuerpo.get(i).getPosicionX() - cuerpo.get(i).getPosicionAnteriorX();
-            double diferenciaPosY = cuerpo.get(i).getPosicionY() - cuerpo.get(i).getPosicionAnteriorY();
-            if (cuerpo.get(i).getPosicionX() < cuerpo.get(i).getPosicionAnteriorX() && diferenciaPosX > pasos) {
-                cuerpo.get(i).setPosicionAnteriorX(cuerpo.get(i).getPosicionX() - pasos);
-            } else if (cuerpo.get(i).getPosicionX() > cuerpo.get(i).getPosicionAnteriorX()) {
-                cuerpo.get(i).setPosicionAnteriorX(cuerpo.get(i).getPosicionX() + pasos);
-            }else if (cuerpo.get(i).getPosicionY() < cuerpo.get(i).getPosicionAnteriorY() && diferenciaPosY > pasos) {
-                cuerpo.get(i).setPosicionAnteriorY(cuerpo.get(i).getPosicionY() - pasos);
-            } else if (cuerpo.get(i).getPosicionY() > cuerpo.get(i).getPosicionAnteriorY()) {
-                cuerpo.get(i).setPosicionAnteriorY(cuerpo.get(i).getPosicionY() + pasos);
-            }
-        }
-    }
-    
     /* GETTERS Y SETTERS */
 
     public Bloque getCabeza() {

@@ -66,7 +66,7 @@ public class FXMLDocumentController implements Initializable {
 
     
     public void mostrarGraficos() {
-        final double VELOCIDAD_JUEGO = 100;
+        final double VELOCIDAD_JUEGO = 60;
         Timeline fps = new Timeline();
         fps.setCycleCount(Animation.INDEFINITE);
         fps.getKeyFrames().add(new KeyFrame(Duration.millis(VELOCIDAD_JUEGO), (t) -> {
@@ -94,7 +94,6 @@ public class FXMLDocumentController implements Initializable {
                                 serpiente.getCuerpo().get(i).getPosicionAnteriorX() 
                                 + ", " + serpiente.getCuerpo().get(i).getPosicionAnteriorY()
                         );
-
                     }
                     /*
                     graficos.fillRect(serpiente.getCabeza().getPosicionX(), serpiente.getCabeza().getPosicionY()
