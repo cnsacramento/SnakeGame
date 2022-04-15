@@ -18,16 +18,18 @@ public class Escenario {
     private double tamanioX;
     private double tamanioY;
     private Bloque manzana;
-    private Bloque[] obstaculos;
     private boolean colisionDetectada = false;
     private ArrayList<Bloque> manzanas;
+    private Bloque[][] obstaculos;
+    private int anchoObstaculos;
+    private int numeroObstaculos;
+    
 
     /* CONSTRUCTORES */
     /**
      * Constructor por defecto sin parametros
      */
-    public Escenario() {
-    }
+    public Escenario() {}
 
     /**
      * Constructor con dos parametros
@@ -76,6 +78,9 @@ public class Escenario {
         return manzana = new Bloque(manzanaX, manzanaY);
     }
     
+    /**
+     * Metodo encargado de generar las manzanas al principio de manera aleatoria
+     */
     public void generarVariasManzanas() {
         
         Random rnd = new Random();
@@ -93,12 +98,18 @@ public class Escenario {
      */
     public void generarObstaculos() {
         Random rnd = new Random();
-        int numeroObstaculos = (int) (Math.random() * 10);
-        obstaculos = new Bloque[numeroObstaculos];
-        for (int i = 0; i < obstaculos.length; i++) {
-            double obsPosX = rnd.nextInt((int) (tamanioY / serpiente.getPasos())) * serpiente.getPasos();
-            double obsPosY = rnd.nextInt((int) (tamanioY / serpiente.getPasos())) * serpiente.getPasos();
-            obstaculos[i] = new Bloque(obsPosX, obsPosY);
+        this.anchoObstaculos = 3;
+        this.numeroObstaculos = rnd.nextInt(10) + 1;
+        
+        obstaculos = new Bloque[numeroObstaculos][anchoObstaculos];
+        for (int i = 0; i < numeroObstaculos; i++) {
+            double obstaculoX = rnd.nextInt((int) (tamanioX / serpiente.getPasos())) * serpiente.getPasos();
+            double obstaculoY = rnd.nextInt((int) (tamanioY / serpiente.getPasos())) * serpiente.getPasos();
+            double ancho = obstaculoX + serpiente.getPasos();
+            for (int j = 0; j < anchoObstaculos; j++) {
+                obstaculos[i][j] = new Bloque(ancho,obstaculoY);
+                ancho += serpiente.getPasos();
+            }
         }
     }
 
@@ -181,13 +192,13 @@ public class Escenario {
         this.tamanioY = tamanioY;
     }
 
-    /*public Bloque getManzana() {
+    public Bloque getManzana() {
         return manzana;
     }
 
     public void setManzana(Bloque manzana) {
         this.manzana = manzana;
-    }*/
+    }
 
     public ArrayList<Bloque> getManzanas() {
         return manzanas;
@@ -197,33 +208,14 @@ public class Escenario {
         this.manzanas = manzanas;
     }
 
-    
-    public Bloque[] getObstaculos() {
+    public Bloque[][] getObstaculos() {
         return obstaculos;
     }
 
-    public void setObstaculos(Bloque[] obstaculos) {
+    public void setObstaculos(Bloque[][] obstaculos) {
         this.obstaculos = obstaculos;
     }
-
     
-    
-    /*
-    public double getManzanaX() {
-        return manzanaX;
-    }
-
-    public void setManzanaX(double manzanaX) {
-        this.manzanaX = manzanaX;
-    }
-
-    public double getManzanaY() {
-        return manzanaY;
-    }
-
-    public void setManzanaY(double manzanaY) {
-        this.manzanaY = manzanaY;
-    }*/
     public boolean getColisionDetectada() {
         return this.colisionDetectada;
     }

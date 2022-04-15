@@ -45,15 +45,14 @@ public class FXMLDocumentController implements Initializable {
         partida.setEscenario(escenario);
         //escenario = partida.getEscenario();
         escenario.generarVariasManzanas();
-        //escenario.generarObstaculos();
+        escenario.generarObstaculos();
         serpiente = escenario.getSerpiente();
         System.out.println("Escenario tamaño -> (" + escenario.getTamanioX() + "," + escenario.getTamanioY() + ")");
         graficos = escenarioCanvas.getGraphicsContext2D();
         dibujarSerpiente();
         dibujarManzana();
-        //dibujarObstaculos();
+        dibujarObstaculos();
         mostrarGraficos();
-        //System.out.println("MANZANA -> (" + escenario.getManzana().getPosicionX() + ", " + escenario.getManzana().getPosicionY() + ")");
     }
 
     /**
@@ -82,13 +81,12 @@ public class FXMLDocumentController implements Initializable {
      * Metodo encargado de dibujar el final de la partida
      */
     public void gameOver() {
-        /*graficos.fillRect(
+        graficos.fillRect(
                 serpiente.getCabeza().getPosicionAnteriorX(), serpiente.getCabeza().getPosicionAnteriorY(),
                 dimensionSerpiente, dimensionSerpiente
-        );*/
-        dibujarSerpiente();
+        );
         dibujarManzana();
-        //dibujarObstaculos();
+        dibujarObstaculos();
         System.out.println("GAME OVER");
     }
     
@@ -99,11 +97,8 @@ public class FXMLDocumentController implements Initializable {
         graficos.clearRect(0, 0, escenarioCanvas.getWidth(), escenarioCanvas.getHeight());
         serpiente.continuarMoviendo();
         dibujarSerpiente();
-        /*
-        graficos.fillRect(serpiente.getCabeza().getPosicionX(), serpiente.getCabeza().getPosicionY()
-            , dimensionSerpiente, dimensionSerpiente);*/
         dibujarManzana();
-        //dibujarObstaculos();
+        dibujarObstaculos();
         escenario.detectarColision();
     }
 
@@ -115,11 +110,6 @@ public class FXMLDocumentController implements Initializable {
             graficos.fillRect(
                     serpiente.getCuerpo().get(i).getPosicionX(), serpiente.getCuerpo().get(i).getPosicionY(),
                     dimensionSerpiente, dimensionSerpiente
-            );
-            System.out.println(
-                    "COORDENADAS: \" " + i + "\" -> ("
-                    + serpiente.getCuerpo().get(i).getPosicionAnteriorX()
-                    + ", " + serpiente.getCuerpo().get(i).getPosicionAnteriorY()
             );
         }
     }
@@ -142,10 +132,13 @@ public class FXMLDocumentController implements Initializable {
      */
     public void dibujarObstaculos() {
         
-        for (int i = 0; i < escenario.getObstaculos().length; i++) {
-            graficos.fillRect(escenario.getObstaculos()[i].getPosicionX()
-                    , escenario.getObstaculos()[i].getPosicionY()
-                    , dimensionSerpiente, dimensionSerpiente);
+        for (Bloque[] blo : escenario.getObstaculos()) {
+            for (Bloque bloque : blo) {
+                graficos.fillRect(
+                        bloque.getPosicionX(), bloque.getPosicionY(),
+                        dimensionSerpiente, dimensionSerpiente
+                );
+            }
         }
     }
 
