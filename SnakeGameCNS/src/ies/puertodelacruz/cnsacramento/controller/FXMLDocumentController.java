@@ -19,6 +19,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 /**
@@ -31,10 +33,10 @@ public class FXMLDocumentController implements Initializable {
     private Canvas escenarioCanvas;
     private GraphicsContext graficos;
     private Partida partida;
-    private final double dimensionSerpiente = 10;
+    private final double dimensionSerpiente = 20;
     private Serpiente serpiente;
     private Escenario escenario;
-
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         partida = new Partida();
@@ -48,18 +50,21 @@ public class FXMLDocumentController implements Initializable {
         escenario.generarVariasManzanas();
         serpiente = escenario.getSerpiente();
         System.out.println("Escenario tamaño -> (" + escenario.getTamanioX() + "," + escenario.getTamanioY() + ")");
+        escenarioCanvas.setStyle("-fx-background-color : red");
         graficos = escenarioCanvas.getGraphicsContext2D();
+        dibujarFondo();
         dibujarObstaculos();
         dibujarSerpiente();
         dibujarManzana();
         mostrarGraficos();
     }
+    
 
     /**
      * Metodo encargado de mantener dibujando la partida
      */
     public void mostrarGraficos() {
-        final double VELOCIDAD_JUEGO = 60;
+        final double VELOCIDAD_JUEGO = 80;
         Timeline fps = new Timeline();
         fps.setCycleCount(Animation.INDEFINITE);
         fps.getKeyFrames().add(new KeyFrame(Duration.millis(VELOCIDAD_JUEGO), (t) -> {
@@ -80,7 +85,9 @@ public class FXMLDocumentController implements Initializable {
     /***
      * Metodo encargado de dibujar el final de la partida
      */
+    private Rectangle serp;
     public void gameOver() {
+        graficos.setFill(Color.RED);
         graficos.fillRect(
                 serpiente.getCabeza().getPosicionAnteriorX(), serpiente.getCabeza().getPosicionAnteriorY(),
                 dimensionSerpiente, dimensionSerpiente
@@ -96,6 +103,7 @@ public class FXMLDocumentController implements Initializable {
     public void continuarJuego() {
         graficos.clearRect(0, 0, escenarioCanvas.getWidth(), escenarioCanvas.getHeight());
         serpiente.continuarMoviendo();
+        dibujarFondo();
         dibujarObstaculos();
         dibujarSerpiente();
         dibujarManzana();
@@ -107,6 +115,7 @@ public class FXMLDocumentController implements Initializable {
      */
     public void dibujarSerpiente() {
         for (int i = 0; i < serpiente.getCuerpo().size(); i++) {
+            graficos.setFill(Color.rgb(50,50 + (i*3),100 + (i*4)));
             graficos.fillRect(
                     serpiente.getCuerpo().get(i).getPosicionX(), serpiente.getCuerpo().get(i).getPosicionY(),
                     dimensionSerpiente, dimensionSerpiente
@@ -118,7 +127,7 @@ public class FXMLDocumentController implements Initializable {
      * Metodo encargado de dibujar la manzana en el canvas
      */
     public void dibujarManzana() {
-        
+        graficos.setFill(Color.RED);
         for (Bloque manzana : escenario.getManzanas()) {
             graficos.fillOval(
                     manzana.getPosicionX(), manzana.getPosicionY(),
@@ -131,13 +140,26 @@ public class FXMLDocumentController implements Initializable {
      * Metodo encargado de dibujar los obstaculos
      */
     public void dibujarObstaculos() {
-        
+        graficos.setFill(Color.web("#003333"));
         for (Bloque[] blo : escenario.getObstaculos()) {
             for (Bloque bloque : blo) {
                 graficos.fillRect(
                         bloque.getPosicionX(), bloque.getPosicionY(),
                         dimensionSerpiente, dimensionSerpiente
                 );
+            }
+        }
+    }
+    
+    public void dibujarFondo() {
+        for (int columnas = 0; columnas < escenarioCanvas.getWidth() / dimensionSerpiente; columnas++) {
+            for (int filas = 0; filas < escenarioCanvas.getWidth() / dimensionSerpiente; filas++) {
+                if ((columnas + filas) % 2 == 0) {
+                    graficos.setFill(Color.web("AAD751"));
+                } else {
+                    graficos.setFill(Color.web("A2D149"));
+                }
+                graficos.fillRect(columnas * dimensionSerpiente, filas * dimensionSerpiente, dimensionSerpiente, dimensionSerpiente);
             }
         }
     }
