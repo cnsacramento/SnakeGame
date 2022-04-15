@@ -33,87 +33,107 @@ public class FXMLDocumentController implements Initializable {
     private final double dimensionSerpiente = 10;
     private Serpiente serpiente;
     private Escenario escenario;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         partida = new Partida();
         double ancho = escenarioCanvas.getWidth();
         double alto = escenarioCanvas.getHeight();
         //partida.empezarPartida(ancho, alto);
-        escenario = new Escenario(ancho,alto,dimensionSerpiente);
+        escenario = new Escenario(ancho, alto, dimensionSerpiente);
         partida.setEscenario(escenario);
         //escenario = partida.getEscenario();
         escenario.generarManzana();
         serpiente = escenario.getSerpiente();
         System.out.println("Escenario tamaño -> (" + escenario.getTamanioX() + "," + escenario.getTamanioY() + ")");
         graficos = escenarioCanvas.getGraphicsContext2D();
-        for (int i = 0; i < serpiente.getCuerpo().size(); i++) {
-            graficos.fillRect(
-                serpiente.getCuerpo().get(i).getPosicionX(), serpiente.getCuerpo().get(i).getPosicionY(), 
-                dimensionSerpiente, dimensionSerpiente
-            );
-            
-        }
-        /*
-        graficos.fillRect(
-                serpiente.getCabeza().getPosicionX(), serpiente.getCabeza().getPosicionY(), 
-                dimensionSerpiente, dimensionSerpiente
-        );*/
-        graficos.fillOval(escenario.getManzana().getPosicionX(), escenario.getManzana().getPosicionY(), dimensionSerpiente, dimensionSerpiente);
+        dibujarSerpiente();
+        dibujarManzana();
         mostrarGraficos();
-        System.out.println("MANZANA -> (" + escenario.getManzana().getPosicionX()+ ", " + escenario.getManzana().getPosicionY()+ ")");
+        System.out.println("MANZANA -> (" + escenario.getManzana().getPosicionX() + ", " + escenario.getManzana().getPosicionY() + ")");
     }
 
-    
+    /**
+     * Metodo encargado de mantener dibujando la partida
+     */
     public void mostrarGraficos() {
         final double VELOCIDAD_JUEGO = 60;
         Timeline fps = new Timeline();
         fps.setCycleCount(Animation.INDEFINITE);
         fps.getKeyFrames().add(new KeyFrame(Duration.millis(VELOCIDAD_JUEGO), (t) -> {
-            if(serpiente.getEnMovimiento()) {
-                
+            if (serpiente.getEnMovimiento()) {
                 escenario.detectarColision();
                 if (escenario.getColisionDetectada()) {
-                    graficos.fillRect(
-                            serpiente.getCabeza().getPosicionAnteriorX(), serpiente.getCabeza().getPosicionAnteriorY()
-                            , dimensionSerpiente, dimensionSerpiente
-                    );
-                    graficos.fillOval(escenario.getManzana().getPosicionX(), escenario.getManzana().getPosicionY(), dimensionSerpiente, dimensionSerpiente);
                     fps.stop();
-                    System.out.println("GAME OVER");
-                }else {
-                    graficos.clearRect(0, 0, escenarioCanvas.getWidth(), escenarioCanvas.getHeight());
-                    serpiente.continuarMoviendo();
-                    for (int i = 0; i < serpiente.getCuerpo().size(); i++) {
-                        graficos.fillRect(
-                                serpiente.getCuerpo().get(i).getPosicionX(), serpiente.getCuerpo().get(i).getPosicionY(),
-                                dimensionSerpiente, dimensionSerpiente
-                        );
-                        System.out.println(
-                                "COORDENADAS: \" " + i + "\" -> (" +
-                                serpiente.getCuerpo().get(i).getPosicionAnteriorX() 
-                                + ", " + serpiente.getCuerpo().get(i).getPosicionAnteriorY()
-                        );
-                    }
-                    /*
-                    graficos.fillRect(serpiente.getCabeza().getPosicionX(), serpiente.getCabeza().getPosicionY()
-                            , dimensionSerpiente, dimensionSerpiente);*/
-                    graficos.fillOval(escenario.getManzana().getPosicionX(), escenario.getManzana().getPosicionY(), dimensionSerpiente, dimensionSerpiente);
-                    escenario.detectarColision();
+                    gameOver();
+                } else {
+                    continuarJuego();
                 }
             }
-           
         }));
-        
+
         fps.play();
-        
     }
     
+    /***
+     * Metodo encargado de dibujar el final de la partida
+     */
+    public void gameOver() {
+        /*graficos.fillRect(
+                serpiente.getCabeza().getPosicionAnteriorX(), serpiente.getCabeza().getPosicionAnteriorY(),
+                dimensionSerpiente, dimensionSerpiente
+        );*/
+        dibujarSerpiente();
+        dibujarManzana();
+        System.out.println("GAME OVER");
+    }
+    
+    /***
+     * Metodo encargado de refrescar el ultimo movimiento
+     */
+    public void continuarJuego() {
+        graficos.clearRect(0, 0, escenarioCanvas.getWidth(), escenarioCanvas.getHeight());
+        serpiente.continuarMoviendo();
+        dibujarSerpiente();
+        /*
+        graficos.fillRect(serpiente.getCabeza().getPosicionX(), serpiente.getCabeza().getPosicionY()
+            , dimensionSerpiente, dimensionSerpiente);*/
+        dibujarManzana();
+        escenario.detectarColision();
+    }
+
+    /***
+     * Metodo encargado de dibujar la serpiente en el canva
+     */
+    public void dibujarSerpiente() {
+        for (int i = 0; i < serpiente.getCuerpo().size(); i++) {
+            graficos.fillRect(
+                    serpiente.getCuerpo().get(i).getPosicionX(), serpiente.getCuerpo().get(i).getPosicionY(),
+                    dimensionSerpiente, dimensionSerpiente
+            );
+            System.out.println(
+                    "COORDENADAS: \" " + i + "\" -> ("
+                    + serpiente.getCuerpo().get(i).getPosicionAnteriorX()
+                    + ", " + serpiente.getCuerpo().get(i).getPosicionAnteriorY()
+            );
+        }
+    }
+    
+    /***
+     * Metodo encargado de dibujar la manzana en el canvas
+     */
+    public void dibujarManzana() {
+        graficos.fillOval(
+                escenario.getManzana().getPosicionX(), escenario.getManzana().getPosicionY(),
+                dimensionSerpiente, dimensionSerpiente
+        );
+    }
+
     @FXML
     private void moverSerpiente(KeyEvent event) {
-        
+
         KeyCode tecla = event.getCode();
-        switch(tecla) {
+        switch (tecla) {
             case UP:
                 System.out.println("Subiendo...");
                 serpiente.mover("UP");
@@ -134,5 +154,5 @@ public class FXMLDocumentController implements Initializable {
                 break;
         }
     }
-    
+
 }

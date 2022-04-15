@@ -16,8 +16,7 @@ public class Escenario {
     private double tamanioX;
     private double tamanioY;
     private Bloque manzana;
-    //private double manzanaX;
-    //private double manzanaY;
+    private Bloque[] obstaculos;
     private boolean colisionDetectada = false;
     
     
@@ -58,17 +57,6 @@ public class Escenario {
     
     /* METODOS */
     
-    /*
-    * Metodo encargado de detectar colisiones 
-    */
-    public void detectarColision() {
-        
-        detectarAutochoque();
-        detectarMuro();
-        detectarDigestion();
-    }
-    
-    
     /**
      * Metodo encargado de generar la posicion de la manzana
      */
@@ -78,6 +66,17 @@ public class Escenario {
         double manzanaY = rnd.nextInt((int) (tamanioY / serpiente.getPasos()) ) * serpiente.getPasos();
         manzana = new Bloque(manzanaX,manzanaY);
     }
+    
+     /*
+    * Metodo encargado de detectar colisiones 
+    */
+    public void detectarColision() {
+        
+        detectarAutochoque();
+        detectarMuro();
+        detectarDigestion();
+    }
+    
     
     /**
      * Metodo encargado de detectar cuando la serpiente come
@@ -113,7 +112,11 @@ public class Escenario {
     public void detectarAutochoque() {
         
         for (int i = 1; i < serpiente.getCuerpo().size(); i++) {
-            if (serpiente.getCabeza().getPosicionX() == serpiente.getCuerpo().get(i).getPosicionX() && serpiente.getCabeza().getPosicionY() == serpiente.getCuerpo().get(i).getPosicionY()) {
+            if (
+                    serpiente.getCabeza().getPosicionX() 
+                    == serpiente.getCuerpo().get(i).getPosicionX() && serpiente.getCabeza().getPosicionY() 
+                    == serpiente.getCuerpo().get(i).getPosicionY()
+                ) {
                 this.colisionDetectada = true;
                 serpiente.bloquearMovimiento("TECLAS");
             }
