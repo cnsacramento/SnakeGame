@@ -4,6 +4,7 @@
  */
 package ies.puertodelacruz.cnsacramento.model;
 
+import java.util.LinkedList;
 import java.util.Random;
 
 /**
@@ -19,6 +20,7 @@ public class Escenario {
     private Bloque manzana;
     private Bloque[] obstaculos;
     private boolean colisionDetectada = false;
+    private LinkedList<Bloque> manzanas;
 
     /* CONSTRUCTORES */
     /**
@@ -61,7 +63,7 @@ public class Escenario {
     /**
      * Metodo encargado de generar la posicion de la manzana
      */
-    public void generarManzana() {
+    public Bloque generarManzana() {
         Random rnd = new Random();
         double manzanaX = rnd.nextInt((int) (tamanioX / serpiente.getPasos())) * serpiente.getPasos();
         double manzanaY = rnd.nextInt((int) (tamanioY / serpiente.getPasos())) * serpiente.getPasos();
@@ -71,7 +73,19 @@ public class Escenario {
                 break;
             }
         }
-        manzana = new Bloque(manzanaX, manzanaY);
+        return manzana = new Bloque(manzanaX, manzanaY);
+    }
+    
+    public void generarVariasManzanas() {
+        
+        Random rnd = new Random();
+        int numeroManzanas = rnd.nextInt(3) + 1;
+        manzanas = new LinkedList<>();
+        
+        for (int i = 0; i < numeroManzanas; i++) {
+            manzanas.add(generarManzana());
+        }
+        
     }
 
     /**
@@ -102,14 +116,15 @@ public class Escenario {
      * Metodo encargado de detectar cuando la serpiente come
      */
     public void detectarDigestion() {
-
-        if (serpiente.getCabeza().getPosicionX() == manzana.getPosicionX() && serpiente.getCabeza().getPosicionY() == manzana.getPosicionY()) {
-            generarManzana();
-            serpiente.aumentarTamanio();
-        } else if (serpiente.getCabeza().getPosicionX() == manzana.getPosicionX() && serpiente.getCabeza().getPosicionY() == manzana.getPosicionY()) {
-            generarManzana();
-            serpiente.aumentarTamanio();
+        
+        for (int i = 0 ; i < manzanas.size() ; i++) {
+            if (serpiente.getCabeza().getPosicionX() == manzanas.get(i).getPosicionX() 
+                    && serpiente.getCabeza().getPosicionY() == manzanas.get(i).getPosicionY()) {
+                manzanas.set(i, generarManzana());
+                serpiente.aumentarTamanio();
+            }
         }
+
     }
 
     /**
@@ -166,14 +181,23 @@ public class Escenario {
         this.tamanioY = tamanioY;
     }
 
-    public Bloque getManzana() {
+    /*public Bloque getManzana() {
         return manzana;
     }
 
     public void setManzana(Bloque manzana) {
         this.manzana = manzana;
+    }*/
+
+    public LinkedList<Bloque> getManzanas() {
+        return manzanas;
     }
 
+    public void setManzanas(LinkedList<Bloque> manzanas) {
+        this.manzanas = manzanas;
+    }
+
+    
     public Bloque[] getObstaculos() {
         return obstaculos;
     }
@@ -182,6 +206,8 @@ public class Escenario {
         this.obstaculos = obstaculos;
     }
 
+    
+    
     /*
     public double getManzanaX() {
         return manzanaX;

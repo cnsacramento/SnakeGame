@@ -4,6 +4,7 @@
  */
 package ies.puertodelacruz.cnsacramento.controller;
 
+import ies.puertodelacruz.cnsacramento.model.Bloque;
 import ies.puertodelacruz.cnsacramento.model.Escenario;
 import ies.puertodelacruz.cnsacramento.model.Partida;
 import ies.puertodelacruz.cnsacramento.model.Serpiente;
@@ -43,7 +44,7 @@ public class FXMLDocumentController implements Initializable {
         escenario = new Escenario(ancho, alto, dimensionSerpiente);
         partida.setEscenario(escenario);
         //escenario = partida.getEscenario();
-        escenario.generarManzana();
+        escenario.generarVariasManzanas();
         //escenario.generarObstaculos();
         serpiente = escenario.getSerpiente();
         System.out.println("Escenario tamaño -> (" + escenario.getTamanioX() + "," + escenario.getTamanioY() + ")");
@@ -52,7 +53,7 @@ public class FXMLDocumentController implements Initializable {
         dibujarManzana();
         //dibujarObstaculos();
         mostrarGraficos();
-        System.out.println("MANZANA -> (" + escenario.getManzana().getPosicionX() + ", " + escenario.getManzana().getPosicionY() + ")");
+        //System.out.println("MANZANA -> (" + escenario.getManzana().getPosicionX() + ", " + escenario.getManzana().getPosicionY() + ")");
     }
 
     /**
@@ -127,10 +128,13 @@ public class FXMLDocumentController implements Initializable {
      * Metodo encargado de dibujar la manzana en el canvas
      */
     public void dibujarManzana() {
-        graficos.fillOval(
-                escenario.getManzana().getPosicionX(), escenario.getManzana().getPosicionY(),
-                dimensionSerpiente, dimensionSerpiente
-        );
+        
+        for (Bloque manzana : escenario.getManzanas()) {
+            graficos.fillOval(
+                    manzana.getPosicionX(), manzana.getPosicionY(),
+                    dimensionSerpiente, dimensionSerpiente
+            );
+        }
     }
     
     /**
