@@ -122,8 +122,9 @@ public class Escenario {
             double obstaculoX = rnd.nextInt((int) (tamanioX / serpiente.getPasos())) * serpiente.getPasos();
             double obstaculoY = rnd.nextInt((int) (tamanioY / serpiente.getPasos())) * serpiente.getPasos();
             if(obstaculoX == serpiente.getCabeza().getPosicionX() && obstaculoY == serpiente.getCabeza().getPosicionY()){
-                obstaculoX += 2;
-                obstaculoY += 2;
+                obstaculoY += serpiente.getPasos();
+            }else if(obstaculoY == serpiente.getCabeza().getPosicionY()) {
+                obstaculoY += serpiente.getPasos();
             }
             double ancho = obstaculoX + serpiente.getPasos();
             for (int j = 0; j < obstaculos[i].length; j++) {

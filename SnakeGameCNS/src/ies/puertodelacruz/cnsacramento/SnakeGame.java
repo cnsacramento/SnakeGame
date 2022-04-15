@@ -19,7 +19,6 @@ public class SnakeGame extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/ies/puertodelacruz/cnsacramento/view/FXMLDocument.fxml"));
-        
         Scene scene = new Scene(root);
         stage.setResizable(false);
         stage.setTitle("SNAKE GAME");
