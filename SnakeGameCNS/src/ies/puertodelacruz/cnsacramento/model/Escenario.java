@@ -184,6 +184,9 @@ public class Escenario {
         }
     }
     
+    /**
+     * Metodo que detecta si hay una colision con un obstaculo
+     */
     public void detectarObstaculo() {
         
         for(Bloque[] obstaculo : obstaculos) {
@@ -199,6 +202,7 @@ public class Escenario {
     }
 
     /* GETTERS Y SETTERS */
+    
     public Serpiente getSerpiente() {
         return this.serpiente;
     }
@@ -254,4 +258,30 @@ public class Escenario {
     public void setColisionDetectada(boolean colisionDetectada) {
         this.colisionDetectada = colisionDetectada;
     }
+
+    public int getAnchoObstaculos() {
+        return anchoObstaculos;
+    }
+
+    public void setAnchoObstaculos(int anchoObstaculos) {
+        this.anchoObstaculos = anchoObstaculos;
+    }
+
+    public int getNumeroObstaculos() {
+        return numeroObstaculos;
+    }
+
+    public void setNumeroObstaculos(int numeroObstaculos) {
+        this.numeroObstaculos = numeroObstaculos;
+    }
+
+    public int getNumeroManzanas() {
+        return numeroManzanas;
+    }
+
+    public void setNumeroManzanas(int numeroManzanas) {
+        this.numeroManzanas = numeroManzanas;
+    }
+    
+    
 }
