@@ -28,9 +28,11 @@ public class Partida {
      * @param tamanioX ancho del escenario
      * @param tamanioY alto del escenario
      */
-    public void empezarPartida(double tamanioX, double tamanioY) {
+    public void empezarPartida(Escenario escenario) {
         
-        escenario = new Escenario(tamanioX,tamanioY);
+        this.escenario = escenario;
+        escenario.generarObstaculos();
+        escenario.generarVariasManzanas();
     }
     
     /**

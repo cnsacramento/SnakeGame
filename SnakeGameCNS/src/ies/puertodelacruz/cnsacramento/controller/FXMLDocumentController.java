@@ -48,21 +48,21 @@ public class FXMLDocumentController implements Initializable {
         partida = new Partida();
         double ancho = escenarioCanvas.getWidth();
         double alto = escenarioCanvas.getHeight();
-        //partida.empezarPartida(ancho, alto);
-        escenario = new Escenario(ancho, alto, dimensionSerpiente);
-        partida.setEscenario(escenario);
+        partida.empezarPartida(new Escenario(ancho, alto, dimensionSerpiente));
+        //escenario = new Escenario(ancho, alto, dimensionSerpiente);
+        //partida.setEscenario(escenario);
         //escenario = partida.getEscenario();
-        escenario.generarObstaculos();
-        escenario.generarVariasManzanas();
+        //escenario.generarObstaculos();
+        //escenario.generarVariasManzanas()
+        escenario = partida.getEscenario();
         serpiente = escenario.getSerpiente();
-        System.out.println("Escenario tamaño -> (" + escenario.getTamanioX() + "," + escenario.getTamanioY() + ")");
-        escenarioCanvas.setStyle("-fx-background-color : red");
         graficos = escenarioCanvas.getGraphicsContext2D();
-        dibujarFondo();
-        dibujarObstaculos();
-        dibujarSerpiente();
-        dibujarManzana();
-        mostrarGraficos();
+        dibujarJuego();
+        //dibujarFondo();
+        //dibujarObstaculos();
+        //dibujarSerpiente();
+        //dibujarManzana();
+        //mostrarGraficos();
     }
     
 
@@ -178,6 +178,17 @@ public class FXMLDocumentController implements Initializable {
             }
         }
     }
+    
+    /**
+     * Metodo encargado de dibujar el juego entero
+     */
+    public void dibujarJuego() {
+        dibujarFondo();
+        dibujarObstaculos();
+        dibujarSerpiente();
+        dibujarManzana();
+        mostrarGraficos();
+    }
 
     @FXML
     private void moverSerpiente(KeyEvent event) {
@@ -185,19 +196,15 @@ public class FXMLDocumentController implements Initializable {
         KeyCode tecla = event.getCode();
         switch (tecla) {
             case UP:
-                System.out.println("Subiendo...");
                 serpiente.mover("UP");
                 break;
             case DOWN:
-                System.out.println("Bajando...");
                 serpiente.mover("DOWN");
                 break;
             case LEFT:
-                System.out.println("Izquierda...");
                 serpiente.mover("LEFT");
                 break;
             case RIGHT:
-                System.out.println("Derecha...");
                 serpiente.mover("RIGHT");
                 break;
             default:

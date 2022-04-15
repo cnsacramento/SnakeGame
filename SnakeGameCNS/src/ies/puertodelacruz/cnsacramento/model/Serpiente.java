@@ -12,10 +12,6 @@ import java.util.ArrayList;
  */
 public class Serpiente {
     
-    /*private double posicionX;
-    private double posicionY;
-    private double posicionAnteriorX;
-    private double posicionAnteriorY;*/
     private Bloque cabeza;
     private double pasos;
     private boolean enMovimiento = false;
