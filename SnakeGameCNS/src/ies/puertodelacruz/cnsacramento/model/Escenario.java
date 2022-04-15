@@ -4,7 +4,7 @@
  */
 package ies.puertodelacruz.cnsacramento.model;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -20,7 +20,7 @@ public class Escenario {
     private Bloque manzana;
     private Bloque[] obstaculos;
     private boolean colisionDetectada = false;
-    private LinkedList<Bloque> manzanas;
+    private ArrayList<Bloque> manzanas;
 
     /* CONSTRUCTORES */
     /**
@@ -68,7 +68,7 @@ public class Escenario {
         double manzanaX = rnd.nextInt((int) (tamanioX / serpiente.getPasos())) * serpiente.getPasos();
         double manzanaY = rnd.nextInt((int) (tamanioY / serpiente.getPasos())) * serpiente.getPasos();
         for (int i = 0; i < serpiente.getCuerpo().size(); i++) {
-            if(serpiente.getCuerpo().get(i).getPosicionX() == manzanaX || serpiente.getCuerpo().get(i).getPosicionX() == manzanaY) {
+            if(serpiente.getCuerpo().get(i).getPosicionX() == manzanaX && serpiente.getCuerpo().get(i).getPosicionX() == manzanaY) {
                 generarManzana();
                 break;
             }
@@ -80,7 +80,7 @@ public class Escenario {
         
         Random rnd = new Random();
         int numeroManzanas = rnd.nextInt(3) + 1;
-        manzanas = new LinkedList<>();
+        manzanas = new ArrayList<>();
         
         for (int i = 0; i < numeroManzanas; i++) {
             manzanas.add(generarManzana());
@@ -189,11 +189,11 @@ public class Escenario {
         this.manzana = manzana;
     }*/
 
-    public LinkedList<Bloque> getManzanas() {
+    public ArrayList<Bloque> getManzanas() {
         return manzanas;
     }
 
-    public void setManzanas(LinkedList<Bloque> manzanas) {
+    public void setManzanas(ArrayList<Bloque> manzanas) {
         this.manzanas = manzanas;
     }
 
