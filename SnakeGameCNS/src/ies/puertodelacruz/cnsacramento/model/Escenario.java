@@ -67,15 +67,29 @@ public class Escenario {
      */
     public Bloque generarManzana() {
         Random rnd = new Random();
+        boolean posicionLimpia = true;
         double manzanaX = rnd.nextInt((int) (tamanioX / serpiente.getPasos())) * serpiente.getPasos();
         double manzanaY = rnd.nextInt((int) (tamanioY / serpiente.getPasos())) * serpiente.getPasos();
         for (int i = 0; i < serpiente.getCuerpo().size(); i++) {
-            if(serpiente.getCuerpo().get(i).getPosicionX() == manzanaX && serpiente.getCuerpo().get(i).getPosicionX() == manzanaY) {
-                generarManzana();
+            if(serpiente.getCuerpo().get(i).getPosicionAnteriorX() == manzanaX
+                    && serpiente.getCuerpo().get(i).getPosicionAnteriorY() == manzanaY) {
+                posicionLimpia = false;
                 break;
             }
         }
-        return manzana = new Bloque(manzanaX, manzanaY);
+        for (Bloque[] obstaculo : obstaculos) {
+            for (Bloque bloque : obstaculo) {
+                if(bloque.getPosicionX() == manzanaX && bloque.getPosicionY() == manzanaY) {
+                    posicionLimpia = false;
+                    break;
+                }
+            }
+        }
+        if(posicionLimpia) {
+            return manzana = new Bloque(manzanaX, manzanaY);
+        }else {
+            return generarManzana();
+        }
     }
     
     /**
@@ -102,11 +116,11 @@ public class Escenario {
         this.numeroObstaculos = rnd.nextInt(10) + 1;
         
         obstaculos = new Bloque[numeroObstaculos][anchoObstaculos];
-        for (int i = 0; i < numeroObstaculos; i++) {
+        for (int i = 0; i < obstaculos.length; i++) {
             double obstaculoX = rnd.nextInt((int) (tamanioX / serpiente.getPasos())) * serpiente.getPasos();
             double obstaculoY = rnd.nextInt((int) (tamanioY / serpiente.getPasos())) * serpiente.getPasos();
             double ancho = obstaculoX + serpiente.getPasos();
-            for (int j = 0; j < anchoObstaculos; j++) {
+            for (int j = 0; j < obstaculos[i].length; j++) {
                 obstaculos[i][j] = new Bloque(ancho,obstaculoY);
                 ancho += serpiente.getPasos();
             }

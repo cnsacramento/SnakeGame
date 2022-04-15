@@ -44,14 +44,14 @@ public class FXMLDocumentController implements Initializable {
         escenario = new Escenario(ancho, alto, dimensionSerpiente);
         partida.setEscenario(escenario);
         //escenario = partida.getEscenario();
-        escenario.generarVariasManzanas();
         escenario.generarObstaculos();
+        escenario.generarVariasManzanas();
         serpiente = escenario.getSerpiente();
         System.out.println("Escenario tamaño -> (" + escenario.getTamanioX() + "," + escenario.getTamanioY() + ")");
         graficos = escenarioCanvas.getGraphicsContext2D();
+        dibujarObstaculos();
         dibujarSerpiente();
         dibujarManzana();
-        dibujarObstaculos();
         mostrarGraficos();
     }
 
@@ -85,8 +85,8 @@ public class FXMLDocumentController implements Initializable {
                 serpiente.getCabeza().getPosicionAnteriorX(), serpiente.getCabeza().getPosicionAnteriorY(),
                 dimensionSerpiente, dimensionSerpiente
         );
-        dibujarManzana();
         dibujarObstaculos();
+        dibujarManzana();
         System.out.println("GAME OVER");
     }
     
@@ -96,9 +96,9 @@ public class FXMLDocumentController implements Initializable {
     public void continuarJuego() {
         graficos.clearRect(0, 0, escenarioCanvas.getWidth(), escenarioCanvas.getHeight());
         serpiente.continuarMoviendo();
+        dibujarObstaculos();
         dibujarSerpiente();
         dibujarManzana();
-        dibujarObstaculos();
         escenario.detectarColision();
     }
 
