@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -42,6 +43,8 @@ public class FXMLDocumentController implements Initializable {
     private Button bordes;
     @FXML
     private Text txtPuntuacion;
+    @FXML
+    private Button btnReiniciar;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -210,6 +213,10 @@ public class FXMLDocumentController implements Initializable {
             default:
                 break;
         }
+    }
+
+    @FXML
+    private void reiniciarPartida(ActionEvent event) {
     }
 
 }

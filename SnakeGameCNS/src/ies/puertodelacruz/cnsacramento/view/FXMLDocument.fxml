@@ -8,11 +8,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="680.0" stylesheets="@estilos.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ies.puertodelacruz.cnsacramento.controller.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="660.0" prefWidth="680.0" stylesheets="@estilos.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ies.puertodelacruz.cnsacramento.controller.FXMLDocumentController">
    <children>
-      <Button fx:id="bordes" disable="true" focusTraversable="false" layoutX="112.0" layoutY="14.0" mnemonicParsing="false" opacity="0.71" stylesheets="@estilos.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <Canvas fx:id="escenarioCanvas" focusTraversable="true" height="600.0" layoutX="20.0" layoutY="78.0" onKeyPressed="#moverSerpiente" width="640.0" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="78.0" />
-      <Button disable="true" focusTraversable="false" layoutY="1.0" mnemonicParsing="false" opacity="0.85" prefHeight="47.0" prefWidth="680.0" AnchorPane.bottomAnchor="650.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Button fx:id="bordes" disable="true" focusTraversable="false" layoutX="112.0" layoutY="14.0" mnemonicParsing="false" opacity="0.71" prefWidth="680.0" stylesheets="@estilos.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Canvas fx:id="escenarioCanvas" focusTraversable="true" height="520.0" layoutX="20.0" layoutY="78.0" onKeyPressed="#moverSerpiente" width="640.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="78.0" />
+      <Button disable="true" focusTraversable="false" layoutY="1.0" mnemonicParsing="false" opacity="0.85" prefHeight="49.0" prefWidth="680.0" AnchorPane.bottomAnchor="611.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <ImageView fitHeight="50.0" fitWidth="49.0" layoutX="270.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../imagenes/manzanita.png" />
@@ -23,5 +23,10 @@
             <Font size="25.0" />
          </font>
       </Text>
+      <Button fx:id="btnReiniciar" alignment="TOP_CENTER" focusTraversable="false" layoutX="276.0" layoutY="611.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#reiniciarPartida" text="REINICIAR" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
