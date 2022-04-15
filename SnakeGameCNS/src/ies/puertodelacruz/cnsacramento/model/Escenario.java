@@ -65,6 +65,12 @@ public class Escenario {
         Random rnd = new Random();
         double manzanaX = rnd.nextInt((int) (tamanioX / serpiente.getPasos())) * serpiente.getPasos();
         double manzanaY = rnd.nextInt((int) (tamanioY / serpiente.getPasos())) * serpiente.getPasos();
+        for (int i = 0; i < serpiente.getCuerpo().size(); i++) {
+            if(serpiente.getCuerpo().get(i).getPosicionX() == manzanaX || serpiente.getCuerpo().get(i).getPosicionX() == manzanaY) {
+                generarManzana();
+                break;
+            }
+        }
         manzana = new Bloque(manzanaX, manzanaY);
     }
 
