@@ -17,10 +17,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 /**
@@ -36,6 +38,10 @@ public class FXMLDocumentController implements Initializable {
     private final double dimensionSerpiente = 20;
     private Serpiente serpiente;
     private Escenario escenario;
+    @FXML
+    private Button bordes;
+    @FXML
+    private Text txtPuntuacion;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -138,6 +144,8 @@ public class FXMLDocumentController implements Initializable {
                     dimensionSerpiente, dimensionSerpiente
             );
         }
+        int puntuacion = serpiente.getCuerpo().size() - 1;
+        txtPuntuacion.setText("" + puntuacion);
     }
     
     /**
