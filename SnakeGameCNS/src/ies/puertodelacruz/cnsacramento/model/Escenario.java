@@ -23,6 +23,7 @@ public class Escenario {
     private Bloque[][] obstaculos;
     private int anchoObstaculos;
     private int numeroObstaculos;
+    private int numeroManzanas;
     
 
     /* CONSTRUCTORES */
@@ -62,6 +63,7 @@ public class Escenario {
     }
 
     /* METODOS */
+    
     /**
      * Metodo encargado de generar la posicion de la manzana
      */
@@ -98,10 +100,10 @@ public class Escenario {
     public void generarVariasManzanas() {
         
         Random rnd = new Random();
-        int numeroManzanas = rnd.nextInt(3) + 1;
+        this.numeroManzanas = rnd.nextInt(3) + 1;
         manzanas = new ArrayList<>();
         
-        for (int i = 0; i < numeroManzanas; i++) {
+        for (int i = 0; i < this.numeroManzanas; i++) {
             manzanas.add(generarManzana());
         }
         
@@ -134,6 +136,7 @@ public class Escenario {
 
         detectarAutochoque();
         detectarMuro();
+        detectarObstaculo();
         detectarDigestion();
     }
 
@@ -177,6 +180,20 @@ public class Escenario {
                     == serpiente.getCuerpo().get(i).getPosicionY()) {
                 this.colisionDetectada = true;
                 serpiente.bloquearMovimiento("TECLAS");
+            }
+        }
+    }
+    
+    public void detectarObstaculo() {
+        
+        for(Bloque[] obstaculo : obstaculos) {
+            for(Bloque obs : obstaculo) {
+                if(serpiente.getCabeza().getPosicionX() == obs.getPosicionX() 
+                        && serpiente.getCabeza().getPosicionY() == obs.getPosicionY()) {
+                    
+                    this.colisionDetectada = true;
+                    serpiente.bloquearMovimiento("TECLAS");
+                }
             }
         }
     }
