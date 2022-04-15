@@ -11,7 +11,6 @@ package ies.puertodelacruz.cnsacramento.model;
  */
 public class Partida {
     
-    private String estado;
     private Escenario escenario;
     
     /* CONSTRUCTORES */
@@ -25,8 +24,7 @@ public class Partida {
     
     /**
      * Metodo que empieza la partida
-     * @param tamanioX ancho del escenario
-     * @param tamanioY alto del escenario
+     * @param escenario Escenario sobre el que se juega la partida
      */
     public void empezarPartida(Escenario escenario) {
         
@@ -35,36 +33,7 @@ public class Partida {
         escenario.generarVariasManzanas();
     }
     
-    /**
-     * Metodo que finaliza la partida
-     */
-    public void finalizarPartida() {
-        
-    }
-    
-    /***
-     * Metodo que indica que la partida se gano
-     */
-    public void ganarPartida() {
-        
-    }
-    
-    /**
-     * Metodo que indica que la partida se perdio
-     */
-    public void perderPartida() {
-        
-    }
-    
     /* GETTERS Y SETTERS */
-    
-    public String getEstado() {
-        return this.estado;
-    }
-    
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
     
     public Escenario getEscenario() {
         return this.escenario;
