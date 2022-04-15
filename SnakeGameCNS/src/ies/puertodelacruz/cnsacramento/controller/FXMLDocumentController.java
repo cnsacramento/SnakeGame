@@ -115,7 +115,11 @@ public class FXMLDocumentController implements Initializable {
      */
     public void dibujarSerpiente() {
         for (int i = 0; i < serpiente.getCuerpo().size(); i++) {
-            graficos.setFill(Color.rgb(50,50 + (i*3),100 + (i*4)));
+            if(i*2 > 255) {
+                graficos.setFill(Color.rgb(50, 255, 255));
+            }else {
+                graficos.setFill(Color.rgb(50,50 + (i*2),100 + (i*2)));
+            }
             graficos.fillRect(
                     serpiente.getCuerpo().get(i).getPosicionX(), serpiente.getCuerpo().get(i).getPosicionY(),
                     dimensionSerpiente, dimensionSerpiente
@@ -151,6 +155,9 @@ public class FXMLDocumentController implements Initializable {
         }
     }
     
+    /**
+     * Metodo que dibuja el fondo del escenario
+     */
     public void dibujarFondo() {
         for (int columnas = 0; columnas < escenarioCanvas.getWidth() / dimensionSerpiente; columnas++) {
             for (int filas = 0; filas < escenarioCanvas.getWidth() / dimensionSerpiente; filas++) {
