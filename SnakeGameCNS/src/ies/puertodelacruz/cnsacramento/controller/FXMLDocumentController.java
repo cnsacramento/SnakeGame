@@ -44,11 +44,13 @@ public class FXMLDocumentController implements Initializable {
         partida.setEscenario(escenario);
         //escenario = partida.getEscenario();
         escenario.generarManzana();
+        //escenario.generarObstaculos();
         serpiente = escenario.getSerpiente();
         System.out.println("Escenario tamaño -> (" + escenario.getTamanioX() + "," + escenario.getTamanioY() + ")");
         graficos = escenarioCanvas.getGraphicsContext2D();
         dibujarSerpiente();
         dibujarManzana();
+        //dibujarObstaculos();
         mostrarGraficos();
         System.out.println("MANZANA -> (" + escenario.getManzana().getPosicionX() + ", " + escenario.getManzana().getPosicionY() + ")");
     }
@@ -85,6 +87,7 @@ public class FXMLDocumentController implements Initializable {
         );*/
         dibujarSerpiente();
         dibujarManzana();
+        //dibujarObstaculos();
         System.out.println("GAME OVER");
     }
     
@@ -99,6 +102,7 @@ public class FXMLDocumentController implements Initializable {
         graficos.fillRect(serpiente.getCabeza().getPosicionX(), serpiente.getCabeza().getPosicionY()
             , dimensionSerpiente, dimensionSerpiente);*/
         dibujarManzana();
+        //dibujarObstaculos();
         escenario.detectarColision();
     }
 
@@ -127,6 +131,18 @@ public class FXMLDocumentController implements Initializable {
                 escenario.getManzana().getPosicionX(), escenario.getManzana().getPosicionY(),
                 dimensionSerpiente, dimensionSerpiente
         );
+    }
+    
+    /**
+     * Metodo encargado de dibujar los obstaculos
+     */
+    public void dibujarObstaculos() {
+        
+        for (int i = 0; i < escenario.getObstaculos().length; i++) {
+            graficos.fillRect(escenario.getObstaculos()[i].getPosicionX()
+                    , escenario.getObstaculos()[i].getPosicionY()
+                    , dimensionSerpiente, dimensionSerpiente);
+        }
     }
 
     @FXML
