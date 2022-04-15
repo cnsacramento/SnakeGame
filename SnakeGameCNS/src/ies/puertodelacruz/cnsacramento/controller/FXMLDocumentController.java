@@ -23,6 +23,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -95,6 +96,12 @@ public class FXMLDocumentController implements Initializable {
         );
         dibujarObstaculos();
         dibujarManzana();
+        graficos.setFill(Color.WHITE);
+        graficos.setFont(new Font("",100));
+        graficos.fillText("GAME OVER", 20, escenarioCanvas.getHeight()/ 2);
+        graficos.setFont(new Font("",10));
+        String creador = "Creador: Christian Novo Sacramento";
+        graficos.fillText(creador, escenarioCanvas.getWidth() - 200, escenarioCanvas.getHeight() - dimensionSerpiente);
         System.out.println("GAME OVER");
     }
     
