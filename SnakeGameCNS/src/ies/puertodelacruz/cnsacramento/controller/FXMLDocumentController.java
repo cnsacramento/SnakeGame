@@ -39,6 +39,7 @@ public class FXMLDocumentController implements Initializable {
     private final double dimensionSerpiente = 20;
     private Serpiente serpiente;
     private Escenario escenario;
+    Timeline fps = new Timeline();
     @FXML
     private Button bordes;
     @FXML
@@ -52,20 +53,11 @@ public class FXMLDocumentController implements Initializable {
         double ancho = escenarioCanvas.getWidth();
         double alto = escenarioCanvas.getHeight();
         partida.empezarPartida(new Escenario(ancho, alto, dimensionSerpiente));
-        //escenario = new Escenario(ancho, alto, dimensionSerpiente);
-        //partida.setEscenario(escenario);
-        //escenario = partida.getEscenario();
-        //escenario.generarObstaculos();
-        //escenario.generarVariasManzanas()
         escenario = partida.getEscenario();
         serpiente = escenario.getSerpiente();
         graficos = escenarioCanvas.getGraphicsContext2D();
         dibujarJuego();
-        //dibujarFondo();
-        //dibujarObstaculos();
-        //dibujarSerpiente();
-        //dibujarManzana();
-        //mostrarGraficos();
+        mostrarGraficos();
     }
     
 
@@ -74,7 +66,7 @@ public class FXMLDocumentController implements Initializable {
      */
     public void mostrarGraficos() {
         final double VELOCIDAD_JUEGO = 80;
-        Timeline fps = new Timeline();
+        fps = new Timeline();
         fps.setCycleCount(Animation.INDEFINITE);
         fps.getKeyFrames().add(new KeyFrame(Duration.millis(VELOCIDAD_JUEGO), (t) -> {
             if (serpiente.getEnMovimiento()) {
@@ -190,7 +182,6 @@ public class FXMLDocumentController implements Initializable {
         dibujarObstaculos();
         dibujarSerpiente();
         dibujarManzana();
-        mostrarGraficos();
     }
 
     @FXML
@@ -199,6 +190,7 @@ public class FXMLDocumentController implements Initializable {
         KeyCode tecla = event.getCode();
         switch (tecla) {
             case UP:
+                System.out.println("Funciona");
                 serpiente.mover("UP");
                 break;
             case DOWN:
@@ -217,6 +209,16 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void reiniciarPartida(ActionEvent event) {
+        //partida = new Partida();
+        double ancho = escenarioCanvas.getWidth();
+        double alto = escenarioCanvas.getHeight();
+        partida.empezarPartida(new Escenario(ancho, alto, dimensionSerpiente));
+        escenario = partida.getEscenario();
+        serpiente = escenario.getSerpiente();
+        graficos.clearRect(0, 0, escenarioCanvas.getWidth(), escenarioCanvas.getHeight());
+        graficos = escenarioCanvas.getGraphicsContext2D();
+        fps.play();
+        dibujarJuego();
     }
 
 }
