@@ -172,8 +172,8 @@ public class Serpiente {
         
         double posUltimoBloX = cuerpo.get(cuerpo.size() - 1).getPosicionAnteriorX();
         double posultimoBloY = cuerpo.get(cuerpo.size() - 1).getPosicionAnteriorY();
-        cuerpo.add( new Bloque(posUltimoBloX, posUltimoBloX,posUltimoBloX,posultimoBloY ));
-        refrescarPosiciones();
+        cuerpo.add( new Bloque(posUltimoBloX, posultimoBloY,posUltimoBloX,posultimoBloY ));
+        //refrescarPosiciones();
     }
     
     /***
