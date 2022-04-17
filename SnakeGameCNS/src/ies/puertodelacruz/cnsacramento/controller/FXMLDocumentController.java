@@ -123,8 +123,8 @@ public class FXMLDocumentController implements Initializable {
      */
     public void dibujarSerpiente() {
         for (int i = 0; i < serpiente.getCuerpo().size(); i++) {
-            if(i*2 > 255) {
-                graficos.setFill(Color.rgb(50, 255, 255));
+            if(i >= 76) {
+                graficos.setFill(Color.rgb(50, 220, 220));
             }else {
                 graficos.setFill(Color.rgb(50,50 + (i*2),100 + (i*2)));
             }
